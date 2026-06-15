@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -201,10 +201,13 @@
 <div class="screen" id="projectsScreen">
   <div class="screen-topbar">
     <div class="topbar-brand"><span class="brand-name">Aatzy</span><span class="brand-accent">Build</span></div>
-    <div class="topbar-right">
+    <div class="topbar-right" style="display:flex; align-items:center; gap:12px;">
       <button class="icon-btn notif-btn" onclick="showScreen('notificationsScreen')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
         <span class="notif-dot"></span>
+      </button>
+      <button class="profile-btn" onclick="showScreen('profileScreen')" style="background:none; border:none; padding:0; cursor:pointer;">
+        <div class="t-avatar" style="background:#2563EB; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:14px; font-weight:bold;">AB</div>
       </button>
     </div>
   </div>
@@ -483,28 +486,122 @@
 </div>
 
 <!-- ═══════════════════════════════════════
-     STOCK HUB
+     STOCK HUB (PROJECTS LIST)
 ═══════════════════════════════════════ -->
 <div class="screen" id="stockHubScreen">
   <div class="inner-topbar">
     <button class="btn-back" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
     <h2 class="inner-title">Stock Hub</h2>
-    <button class="icon-btn" onclick="openSheet('addStockSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+    <div style="width:36px"></div>
   </div>
   <div class="screen-body pad">
-    <div class="stock-summary-row" style="padding:0; margin-bottom:16px;">
-      <div class="stock-sum-card added"><span class="stock-sum-val">1,240</span><span class="stock-sum-lbl">Added</span></div>
-      <div class="stock-sum-card used"><span class="stock-sum-val">780</span><span class="stock-sum-lbl">Used</span></div>
-      <div class="stock-sum-card remaining"><span class="stock-sum-val">460</span><span class="stock-sum-lbl">Remaining</span></div>
+    <div class="section-pad" style="padding-bottom:0"><h3 style="font-family:'Plus Jakarta Sans'; font-size:18px; font-weight:800; margin-bottom:4px;">Select Project</h3><p style="font-size:12px; color:var(--text-tertiary); margin-bottom:16px;">Choose a project to manage its materials</p></div>
+    
+    <div class="project-card" onclick="showScreen('projectStockScreen')" style="border-left:3px solid #2563EB;">
+      <div class="proj-card-top"><span class="proj-type-badge commercial">Commercial</span></div>
+      <h3 class="proj-name">Metro Towers Phase 2</h3>
+      <p class="proj-sub">12 Floors · Duplex · Chennai, TN</p>
+      <div style="margin-top:12px; display:flex; gap:12px;">
+         <div style="flex:1; background:var(--success-surface); padding:8px; border-radius:8px; text-align:center;"><p style="font-size:10px; color:var(--success); font-weight:600; text-transform:uppercase;">Good Stock</p><p style="font-size:16px; font-weight:800; color:var(--text-main);">12 items</p></div>
+         <div style="flex:1; background:var(--error-surface); padding:8px; border-radius:8px; text-align:center;"><p style="font-size:10px; color:var(--error); font-weight:600; text-transform:uppercase;">Low Stock</p><p style="font-size:16px; font-weight:800; color:var(--text-main);">3 items</p></div>
+      </div>
     </div>
-    <div class="chip-row" style="padding:0 0 12px 0;"><button class="chip active" onclick="filterChip(this)">All</button><button class="chip" onclick="filterChip(this)">Cement</button><button class="chip" onclick="filterChip(this)">Sand</button><button class="chip" onclick="filterChip(this)">Steel</button><button class="chip" onclick="filterChip(this)">Bricks</button></div>
-    <div class="stock-card"><div class="stock-info"><h4>OPC Cement 53G</h4><p>Cement · UltraTech</p></div><div class="stock-qty"><span class="val" style="color:var(--primary)">320</span><span class="unit">Bags</span><span class="stock-status" style="color:var(--success)">✓ Good</span></div></div>
-    <div class="stock-card low-stock"><div class="stock-info"><h4>Steel Rod 12mm</h4><p>Steel · JSW</p></div><div class="stock-qty"><span class="val" style="color:var(--error)">0.5</span><span class="unit">Tons</span><span class="stock-status" style="color:var(--error)">⚠ Low</span></div></div>
-    <div class="stock-card"><div class="stock-info"><h4>River Sand</h4><p>Sand · Local Vendor</p></div><div class="stock-qty"><span class="val" style="color:var(--primary)">80</span><span class="unit">Load</span><span class="stock-status" style="color:var(--success)">✓ Good</span></div></div>
-    <div class="stock-card"><div class="stock-info"><h4>M Sand (Plastering)</h4><p>Sand · Local Vendor</p></div><div class="stock-qty"><span class="val" style="color:var(--primary)">45</span><span class="unit">Load</span><span class="stock-status" style="color:var(--success)">✓ Good</span></div></div>
-    <div class="stock-card low-stock"><div class="stock-info"><h4>Red Bricks</h4><p>Bricks · KM Works</p></div><div class="stock-qty"><span class="val" style="color:var(--error)">200</span><span class="unit">Piece</span><span class="stock-status" style="color:var(--error)">⚠ Low</span></div></div>
-    <div class="stock-card"><div class="stock-info"><h4>Electrical Wires</h4><p>Electrical · Havells</p></div><div class="stock-qty"><span class="val" style="color:var(--primary)">150</span><span class="unit">Meter</span><span class="stock-status" style="color:var(--success)">✓ Good</span></div></div>
-    <button class="btn-outline" style="width:100%; margin-top:12px;" onclick="showToast('Stock history opened')">📋 View Stock History</button>
+    
+    <div class="project-card" onclick="showScreen('projectStockScreen')" style="border-left:3px solid #16A34A;">
+      <div class="proj-card-top"><span class="proj-type-badge residential">Residential</span></div>
+      <h3 class="proj-name">Sunrise Villa</h3>
+      <p class="proj-sub">3 Floors · Simplex · Coimbatore, TN</p>
+      <div style="margin-top:12px; display:flex; gap:12px;">
+         <div style="flex:1; background:var(--success-surface); padding:8px; border-radius:8px; text-align:center;"><p style="font-size:10px; color:var(--success); font-weight:600; text-transform:uppercase;">Good Stock</p><p style="font-size:16px; font-weight:800; color:var(--text-main);">8 items</p></div>
+         <div style="flex:1; background:var(--error-surface); padding:8px; border-radius:8px; text-align:center;"><p style="font-size:10px; color:var(--error); font-weight:600; text-transform:uppercase;">Low Stock</p><p style="font-size:16px; font-weight:800; color:var(--text-main);">0 items</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PROJECT STOCK SCREEN
+═══════════════════════════════════════ -->
+<div class="screen" id="projectStockScreen">
+  <div class="inner-topbar">
+    <button class="btn-back" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+    <div style="text-align:center;"><h2 class="inner-title" style="margin-bottom:2px;">Metro Towers</h2><p style="font-size:11px; color:var(--text-secondary); line-height:1;">Stock Details</p></div>
+    <div style="width:36px"></div>
+  </div>
+  
+  <div class="tab-bar" id="stockTabBar">
+    <button class="tab-btn active" onclick="switchTab(this,'tabStockDaily','stockTabBar')">Daily Log</button>
+    <button class="tab-btn" onclick="switchTab(this,'tabStockOverall','stockTabBar')">Overall</button>
+  </div>
+
+  <!-- Tab: Daily Log -->
+  <div class="tab-pane active" id="tabStockDaily">
+    <div class="screen-body pad">
+      <div class="date-nav" style="margin:-16px -16px 16px; padding:12px 16px; background:var(--bg-card); border-bottom:1px solid var(--border); border-radius:0; display:flex; justify-content:center; align-items:center; gap:16px;">
+        <div style="position:relative; display:flex; align-items:center; gap:8px;">
+          <span class="date-nav-text" style="margin:0;">Friday 12 Jun, 2026</span>
+          <div style="position:relative; width:20px; height:20px; color:var(--text-secondary); cursor:pointer;">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+             <input type="date" value="2026-06-12" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="/* handle date change */">
+          </div>
+        </div>
+      </div>
+      
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+         <h4 style="font-size:14px; color:var(--text-secondary);">Added Today</h4>
+         <button onclick="openSheet('addStockSheet')" style="background:var(--primary-surface); color:var(--primary); border:none; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700; display:flex; align-items:center; gap:4px; cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add Material</button>
+      </div>
+      
+      <div class="stock-history-item" style="display:flex; align-items:center; justify-content:space-between; padding:12px; background:var(--bg-input); border-radius:var(--radius-md); margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+           <div style="width:40px; height:40px; border-radius:50%; background:var(--success-surface); color:var(--success); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></div>
+           <div><p style="font-weight:700; font-size:14px;">OPC Cement 53G</p><p style="font-size:12px; color:var(--text-tertiary);">UltraTech · 10:30 AM</p></div>
+        </div>
+        <div style="text-align:right;"><p style="font-weight:800; font-size:16px; color:var(--success);">+100</p><p style="font-size:11px; color:var(--text-tertiary);">Bags</p></div>
+      </div>
+      
+      <div class="stock-history-item" style="display:flex; align-items:center; justify-content:space-between; padding:12px; background:var(--bg-input); border-radius:var(--radius-md); margin-bottom:20px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+           <div style="width:40px; height:40px; border-radius:50%; background:var(--success-surface); color:var(--success); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></div>
+           <div><p style="font-weight:700; font-size:14px;">River Sand</p><p style="font-size:12px; color:var(--text-tertiary);">Local Vendor · 11:15 AM</p></div>
+        </div>
+        <div style="text-align:right;"><p style="font-weight:800; font-size:16px; color:var(--success);">+5</p><p style="font-size:11px; color:var(--text-tertiary);">Load</p></div>
+      </div>
+      
+      <div style="height:1px; background:var(--border-light); margin-bottom:20px;"></div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+         <h4 style="font-size:14px; color:var(--text-secondary);">Used Today</h4>
+         <button onclick="openSheet('useStockSheet')" style="background:var(--error-surface); color:var(--error); border:none; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700; display:flex; align-items:center; gap:4px; cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/></svg> Log Usage</button>
+      </div>
+
+      <div class="stock-history-item" style="display:flex; align-items:center; justify-content:space-between; padding:12px; background:var(--bg-input); border-radius:var(--radius-md); margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+           <div style="width:40px; height:40px; border-radius:50%; background:var(--error-surface); color:var(--error); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+           <div><p style="font-weight:700; font-size:14px;">OPC Cement 53G</p><p style="font-size:12px; color:var(--text-tertiary);">Plastering - Floor 9 · 02:00 PM</p></div>
+        </div>
+        <div style="text-align:right;"><p style="font-weight:800; font-size:16px; color:var(--error);">-20</p><p style="font-size:11px; color:var(--text-tertiary);">Bags</p></div>
+      </div>
+
+      <div class="stock-history-item" style="display:flex; align-items:center; justify-content:space-between; padding:12px; background:var(--bg-input); border-radius:var(--radius-md); margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+           <div style="width:40px; height:40px; border-radius:50%; background:var(--error-surface); color:var(--error); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+           <div><p style="font-weight:700; font-size:14px;">River Sand</p><p style="font-size:12px; color:var(--text-tertiary);">Plastering - Floor 9 · 02:00 PM</p></div>
+        </div>
+        <div style="text-align:right;"><p style="font-weight:800; font-size:16px; color:var(--error);">-2</p><p style="font-size:11px; color:var(--text-tertiary);">Load</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab: Overall -->
+  <div class="tab-pane" id="tabStockOverall">
+    <div class="screen-body pad">
+      <div class="chip-row" style="padding:0 0 12px 0;"><button class="chip active" onclick="filterChip(this)">All</button><button class="chip" onclick="filterChip(this)">Cement</button><button class="chip" onclick="filterChip(this)">Sand</button><button class="chip" onclick="filterChip(this)">Steel</button><button class="chip" onclick="filterChip(this)">Bricks</button></div>
+      <div class="stock-card"><div class="stock-info"><h4>OPC Cement 53G</h4><p>Cement · UltraTech</p></div><div class="stock-qty"><span class="val" style="color:var(--primary)">320</span><span class="unit">Bags</span><span class="stock-status" style="color:var(--success)">✓ Good</span></div></div>
+      <div class="stock-card low-stock"><div class="stock-info"><h4>Steel Rod 12mm</h4><p>Steel · JSW</p></div><div class="stock-qty"><span class="val" style="color:var(--error)">0.5</span><span class="unit">Tons</span><span class="stock-status" style="color:var(--error)">⚠ Low</span></div></div>
+      <div class="stock-card"><div class="stock-info"><h4>River Sand</h4><p>Sand · Local Vendor</p></div><div class="stock-qty"><span class="val" style="color:var(--primary)">80</span><span class="unit">Load</span><span class="stock-status" style="color:var(--success)">✓ Good</span></div></div>
+      <div class="stock-card"><div class="stock-info"><h4>M Sand (Plastering)</h4><p>Sand · Local Vendor</p></div><div class="stock-qty"><span class="val" style="color:var(--primary)">45</span><span class="unit">Load</span><span class="stock-status" style="color:var(--success)">✓ Good</span></div></div>
+    </div>
   </div>
 </div>
 
@@ -611,7 +708,12 @@
 <div class="screen" id="workerDashScreen">
   <div class="screen-topbar">
     <div class="topbar-brand"><span class="brand-name">Aatzy</span><span class="brand-accent">Build</span></div>
-    <div class="topbar-right"><button class="icon-btn notif-btn" onclick="showScreen('notificationsScreen')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span class="notif-dot"></span></button></div>
+    <div class="topbar-right" style="display:flex; align-items:center; gap:12px;">
+      <button class="icon-btn notif-btn" onclick="showScreen('notificationsScreen')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span class="notif-dot"></span></button>
+      <button class="profile-btn" onclick="showScreen('workerProfileScreen')" style="background:none; border:none; padding:0; cursor:pointer;">
+        <div class="t-avatar" style="background:#16A34A; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:14px; font-weight:bold;">SK</div>
+      </button>
+    </div>
   </div>
   <div class="screen-body pad">
     <div class="worker-hero">
@@ -833,7 +935,7 @@
   <button class="nav-item" onclick="switchBottomNav(this,'dashboardScreen','companyNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Dashboard</span></button>
   <button class="nav-item" onclick="switchBottomNav(this,'stockHubScreen','companyNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg><span>Materials</span></button>
   <button class="nav-item" onclick="switchBottomNav(this,'workersScreen','companyNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/></svg><span>Workers</span></button>
-  <button class="nav-item" onclick="switchBottomNav(this,'profileScreen','companyNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></button>
+  <button class="nav-item" onclick="switchBottomNav(this,'profileScreen','companyNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span>Settings</span></button>
 </div>
 
 <!-- Worker Bottom Nav -->
@@ -841,13 +943,13 @@
   <button class="nav-item active" onclick="switchBottomNav(this,'workerDashScreen','workerNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Dashboard</span></button>
   <button class="nav-item" onclick="switchBottomNav(this,'workerTasksScreen','workerNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span>Tasks</span></button>
   <button class="nav-item" onclick="switchBottomNav(this,'workerAttendanceScreen','workerNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 11l-5 5-2.5-2.5"/></svg><span>Attendance</span></button>
-  <button class="nav-item" onclick="switchBottomNav(this,'workerProfileScreen','workerNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></button>
+  <button class="nav-item" onclick="switchBottomNav(this,'workerProfileScreen','workerNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span>Settings</span></button>
 </div>
 
 <!-- Client Bottom Nav -->
 <div class="bottom-nav hidden" id="clientNav">
   <button class="nav-item active" onclick="switchBottomNav(this,'clientOverviewScreen','clientNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Overview</span></button>
-  <button class="nav-item" onclick="switchBottomNav(this,'clientProfileScreen','clientNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></button>
+  <button class="nav-item" onclick="switchBottomNav(this,'clientProfileScreen','clientNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span>Settings</span></button>
 </div>
 
 <!-- ═══════════════════════════════════════
@@ -892,11 +994,32 @@
   <div class="sheet-drag"></div>
   <div class="sheet-head"><h3>Add Stock</h3><button class="sheet-close" onclick="closeSheet('addStockSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
   <div class="sheet-body">
-    <div class="field-group"><label class="field-label">Material Name <span class="field-required">*</span></label><div class="sel-wrap"><select class="field-select"><option>Cement</option><option>River Sand</option><option>M Sand</option><option>Bricks</option><option>Steel Rod</option><option>Paint</option><option>Tiles</option><option>Electrical Materials</option><option>Plumbing Materials</option></select><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="6 9 12 15 18 9"/></svg></div></div>
-    <div class="field-group"><label class="field-label">Quantity <span class="field-required">*</span></label><input class="field-input" type="number" placeholder="e.g. 100"></div>
-    <div class="field-group"><label class="field-label">Unit</label><div class="sel-wrap"><select class="field-select"><option>Bag</option><option>Half Bag</option><option>1.5 Bag</option><option>Kg</option><option>Ton</option><option>Piece</option><option>Unit</option><option>Meter</option><option>Feet</option><option>Load</option></select><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+    <div class="field-group"><label class="field-label">Date <span class="field-required">*</span></label><input class="field-input" type="date" value="2026-06-15" min="2026-06-15" max="2026-06-15"></div>
+    <div class="field-group"><label class="field-label">Material Name <span class="field-required">*</span></label><div class="sel-wrap"><select class="field-select"><option>Cement</option><option>River Sand</option><option>M Sand</option><option>Bricks</option><option>Steel Rod</option><option>Paint</option><option>Tiles</option><option>Electrical Materials</option><option>Plumbing Materials</option><option value="new" style="font-weight:bold;color:var(--primary)">+ Add New Material</option></select><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+    <div class="field-group"><label class="field-label">Vendor (Optional)</label><input class="field-input" type="text" placeholder="e.g. UltraTech Dealer"></div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Quantity <span class="field-required">*</span></label><input class="field-input" type="number" placeholder="e.g. 100"></div>
+      <div class="field-group"><label class="field-label">Unit</label><div class="sel-wrap"><select class="field-select"><option>Bag</option><option>Load</option><option>Ton</option><option>Piece</option><option>Meter</option></select><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+    </div>
   </div>
   <div class="sheet-footer"><button class="btn-primary" onclick="closeSheet('addStockSheet'); showToast('Stock added!')">Add Stock</button></div>
+</div>
+
+<!-- Log Material Usage Sheet -->
+<div class="sheet-overlay" id="useStockSheetOverlay" onclick="closeSheet('useStockSheet')"></div>
+<div class="bottom-sheet" id="useStockSheet">
+  <div class="sheet-drag"></div>
+  <div class="sheet-head"><h3>Log Material Usage</h3><button class="sheet-close" onclick="closeSheet('useStockSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="sheet-body">
+    <div class="field-group"><label class="field-label">Date <span class="field-required">*</span></label><input class="field-input" type="date" value="2026-06-15" min="2026-06-15" max="2026-06-15"></div>
+    <div class="field-group"><label class="field-label">Material Name <span class="field-required">*</span></label><div class="sel-wrap"><select class="field-select"><option>OPC Cement 53G</option><option>River Sand</option><option>M Sand</option><option>Steel Rod 12mm</option><option>Red Bricks</option></select><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+    <div class="field-group"><label class="field-label">Purpose / Task (Optional)</label><input class="field-input" type="text" placeholder="e.g. Plastering Floor 9"></div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Quantity Used <span class="field-required">*</span></label><input class="field-input" type="number" placeholder="e.g. 20"></div>
+      <div class="field-group"><label class="field-label">Unit</label><div class="sel-wrap"><select class="field-select"><option>Bag</option><option>Load</option><option>Ton</option><option>Piece</option><option>Meter</option></select><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+    </div>
+  </div>
+  <div class="sheet-footer"><button class="btn-primary" style="background:var(--error); border-color:var(--error); box-shadow:0 4px 12px rgba(220,38,38,0.3);" onclick="closeSheet('useStockSheet'); showToast('Material usage logged!')">Submit Usage</button></div>
 </div>
 
 <!-- Edit Project Sheet -->
