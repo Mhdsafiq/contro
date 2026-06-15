@@ -1,0 +1,374 @@
+/* ═══════════════════════════════════════
+   AATZY BUILD — UI CONTROLLER
+   Frontend-only, dummy data
+═══════════════════════════════════════ */
+
+// ─── STATE ─── //
+let currentRole = null; // 'company' | 'worker' | 'client'
+let screenHistory = ['roleScreen'];
+let currentStep = 1;
+const totalSteps = 5;
+let currentDate = new Date();
+let attendanceSubmitted = false;
+
+// ─── INITIALIZATION ─── //
+document.addEventListener('DOMContentLoaded', () => {
+  showScreen('roleScreen');
+  setupOTPInputs();
+  updateAttendanceTime();
+  setInterval(updateAttendanceTime, 1000);
+  initAttendanceCalendar();
+});
+
+// ─── SCREEN NAVIGATION ─── //
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(s => {
+    s.classList.remove('active');
+  });
+
+  const target = document.getElementById(screenId);
+  if (target) {
+    target.classList.add('active');
+  }
+
+  if (screenHistory[screenHistory.length - 1] !== screenId) {
+    screenHistory.push(screenId);
+  }
+
+  updateBottomNav(screenId);
+}
+
+function goBack() {
+  if (screenHistory.length > 1) {
+    screenHistory.pop();
+    const prev = screenHistory[screenHistory.length - 1];
+    // avoid re-pushing by temporarily removing last item
+    const saved = screenHistory.pop();
+    showScreen(prev);
+    screenHistory.push(saved);
+  }
+}
+
+// ─── BOTTOM NAV ─── //
+const companyMainScreens  = ['projectsScreen', 'dashboardScreen', 'stockHubScreen', 'workersScreen', 'profileScreen'];
+const workerMainScreens   = ['workerDashScreen', 'workerTasksScreen', 'workerAttendanceScreen', 'workerProfileScreen'];
+const clientMainScreens   = ['clientOverviewScreen', 'clientProfileScreen'];
+
+function updateBottomNav(screenId) {
+  const companyNav = document.getElementById('companyNav');
+  const workerNav  = document.getElementById('workerNav');
+  const clientNav  = document.getElementById('clientNav');
+
+  companyNav.classList.add('hidden');
+  workerNav.classList.add('hidden');
+  clientNav.classList.add('hidden');
+
+  if (!currentRole) return;
+
+  if (currentRole === 'company') {
+    const showOn = [...companyMainScreens, 'projectOverviewScreen', 'createProjectScreen', 'notificationsScreen'];
+    if (showOn.includes(screenId)) companyNav.classList.remove('hidden');
+  } else if (currentRole === 'worker') {
+    const showOn = [...workerMainScreens, 'leaveScreen', 'notificationsScreen', 'stockHubScreen'];
+    if (showOn.includes(screenId)) workerNav.classList.remove('hidden');
+  } else if (currentRole === 'client') {
+    if (clientMainScreens.includes(screenId)) clientNav.classList.remove('hidden');
+  }
+}
+
+function switchBottomNav(btn, screenId, navId) {
+  const nav = document.getElementById(navId);
+  nav.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  btn.classList.add('active');
+  screenHistory = [screenId];
+  showScreen(screenId);
+}
+
+// ─── LOGIN / ROLE ─── //
+function loginAs(role) {
+  currentRole = role;
+  if (role === 'company') {
+    screenHistory = ['projectsScreen'];
+    showScreen('projectsScreen');
+    // Activate first nav item
+    const nav = document.getElementById('companyNav');
+    nav.querySelectorAll('.nav-item').forEach((n, i) => n.classList.toggle('active', i === 0));
+  } else if (role === 'worker') {
+    screenHistory = ['workerDashScreen'];
+    showScreen('workerDashScreen');
+    const nav = document.getElementById('workerNav');
+    nav.querySelectorAll('.nav-item').forEach((n, i) => n.classList.toggle('active', i === 0));
+  } else if (role === 'client') {
+    screenHistory = ['clientOverviewScreen'];
+    showScreen('clientOverviewScreen');
+    const nav = document.getElementById('clientNav');
+    nav.querySelectorAll('.nav-item').forEach((n, i) => n.classList.toggle('active', i === 0));
+  }
+}
+
+function logout() {
+  currentRole = null;
+  attendanceSubmitted = false;
+  screenHistory = ['roleScreen'];
+  showScreen('roleScreen');
+  document.querySelectorAll('.bottom-nav').forEach(n => n.classList.add('hidden'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.bottom-nav').forEach(nav => {
+    const first = nav.querySelector('.nav-item');
+    if (first) first.classList.add('active');
+  });
+  showToast('Logged out successfully');
+}
+
+// ─── TABS ─── //
+function switchTab(btn, paneId, barId) {
+  const bar = btn.closest('.tab-bar') || document.getElementById(barId);
+  if (!bar) return;
+  bar.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const screen = bar.closest('.screen');
+  if (!screen) return;
+  screen.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  const pane = document.getElementById(paneId);
+  if (pane) pane.classList.add('active');
+}
+
+// ─── FILTER CHIPS ─── //
+function filterChip(btn) {
+  const row = btn.closest('.chip-row');
+  if (!row) return;
+  row.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ─── CREATE PROJECT WIZARD ─── //
+function nextStep() {
+  if (currentStep === totalSteps) {
+    showToast('Project created successfully! 🎉');
+    goBack();
+    resetWizard();
+    return;
+  }
+  setStep(currentStep + 1);
+}
+
+function prevStep() {
+  if (currentStep > 1) setStep(currentStep - 1);
+}
+
+function setStep(step) {
+  currentStep = step;
+  document.querySelectorAll('.step-pane').forEach(p => p.classList.remove('active'));
+  const pane = document.getElementById('step-' + step);
+  if (pane) pane.classList.add('active');
+  for (let i = 1; i <= totalSteps; i++) {
+    const si = document.getElementById('si-' + i);
+    if (!si) continue;
+    si.classList.remove('active', 'done');
+    if (i === step) si.classList.add('active');
+    else if (i < step) si.classList.add('done');
+  }
+  document.querySelectorAll('.stepper-bar .step-line').forEach((line, idx) => {
+    line.classList.toggle('done', idx < step - 1);
+  });
+  const backBtn = document.getElementById('cpBackBtn');
+  const nextBtn = document.getElementById('cpNextBtn');
+  if (backBtn) backBtn.style.display = step > 1 ? '' : 'none';
+  if (nextBtn) nextBtn.textContent = step === totalSteps ? 'Create Project' : 'Next';
+}
+
+function resetWizard() {
+  currentStep = 1;
+  setStep(1);
+}
+
+function addStage() {
+  const area = document.getElementById('stagesArea');
+  if (!area) return;
+  const row = document.createElement('div');
+  row.className = 'field-row';
+  row.style.marginBottom = '10px';
+  row.innerHTML = `<input class="field-input" type="text" placeholder="Stage Name" style="flex:1.5"><input class="field-input" type="number" placeholder="₹ Amount" style="flex:1">`;
+  area.appendChild(row);
+}
+
+// ─── BOTTOM SHEETS ─── //
+function openSheet(sheetId) {
+  const sheet = document.getElementById(sheetId);
+  const overlay = document.getElementById(sheetId + 'Overlay');
+  if (sheet) sheet.classList.add('active');
+  if (overlay) overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSheet(sheetId) {
+  const sheet = document.getElementById(sheetId);
+  const overlay = document.getElementById(sheetId + 'Overlay');
+  if (sheet) sheet.classList.remove('active');
+  if (overlay) overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ─── TOAST ─── //
+function showToast(msg) {
+  const toast = document.getElementById('toastEl');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// ─── OTP INPUT AUTO-FOCUS ─── //
+function setupOTPInputs() {
+  document.querySelectorAll('.otp-inputs').forEach(container => {
+    const inputs = container.querySelectorAll('.otp-input');
+    inputs.forEach((inp, idx) => {
+      inp.addEventListener('input', (e) => {
+        if (e.target.value && idx < inputs.length - 1) inputs[idx + 1].focus();
+      });
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && idx > 0) inputs[idx - 1].focus();
+      });
+    });
+  });
+}
+
+// ─── WORKER TASK CHECK ─── //
+function toggleTaskCheck(btn) {
+  btn.classList.toggle('done');
+  const info = btn.nextElementSibling;
+  if (info) {
+    const name = info.querySelector('.wtask-name');
+    if (btn.classList.contains('done')) {
+      if (name) { name.style.textDecoration = 'line-through'; name.style.opacity = '0.5'; }
+      showToast('Task marked as done! ✅');
+    } else {
+      if (name) { name.style.textDecoration = ''; name.style.opacity = ''; }
+    }
+  }
+}
+
+// ─── DATE NAVIGATION ─── //
+function changeDate(offset) {
+  currentDate.setDate(currentDate.getDate() + offset);
+  const options = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
+  const today = new Date();
+  const isToday = currentDate.toDateString() === today.toDateString();
+  const formatted = currentDate.toLocaleDateString('en-IN', options);
+  const display = isToday ? `Today, ${formatted}` : formatted;
+  document.querySelectorAll('.date-nav-text').forEach(el => { el.textContent = display; });
+}
+
+// ─── ATTENDANCE TIME ─── //
+function updateAttendanceTime() {
+  const timeEl = document.getElementById('attTimeText');
+  const dateEl = document.getElementById('attDateText');
+  if (timeEl) {
+    const now = new Date();
+    timeEl.textContent = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true }).toUpperCase();
+  }
+  if (dateEl) {
+    const now = new Date();
+    dateEl.textContent = now.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  }
+}
+
+// ─── ATTENDANCE SUBMIT ─── //
+function submitAttendance() {
+  const countInput = document.getElementById('attWorkerCount');
+  const wageInput  = document.getElementById('attWage');
+  const teaInput   = document.getElementById('attTea');
+  const count = countInput ? (countInput.value || 0) : 0;
+  const wage  = wageInput  ? (wageInput.value || 0)  : 0;
+  const tea   = teaInput   ? (teaInput.value || 0)   : 0;
+
+  if (!count || count < 1) { showToast('⚠ Please enter worker count'); return; }
+
+  // Update submit button state
+  const submitBtn = document.getElementById('attSubmitBtn');
+  if (submitBtn) {
+    submitBtn.textContent = '✅ Submitted';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.7';
+  }
+
+  // Add to today summary
+  const summaryEl = document.getElementById('attTodaySummary');
+  if (summaryEl) {
+    const totalWage = parseInt(count) * parseInt(wage);
+    summaryEl.innerHTML = `
+      <div class="att-submitted-card">
+        <div class="att-sub-row"><span>Workers Present</span><strong>${count}</strong></div>
+        <div class="att-sub-row"><span>Total Wages</span><strong style="color:var(--primary)">₹${parseInt(totalWage).toLocaleString('en-IN')}</strong></div>
+        <div class="att-sub-row"><span>Tea &amp; Snacks</span><strong>₹${parseInt(tea).toLocaleString('en-IN')}</strong></div>
+        <div class="att-sub-row"><span>Total Expense</span><strong style="color:var(--error)">₹${(parseInt(totalWage)+parseInt(tea)).toLocaleString('en-IN')}</strong></div>
+      </div>`;
+  }
+
+  // Prepend to history
+  const historyEl = document.getElementById('attHistoryList');
+  if (historyEl) {
+    const today = new Date();
+    const day   = today.getDate();
+    const month = today.toLocaleString('en-IN', { month: 'short' });
+    const item  = document.createElement('div');
+    item.className = 'att-history-item';
+    item.innerHTML = `
+      <div class="att-date-badge"><span class="day">${day}</span><span class="month">${month}</span></div>
+      <div class="tm-info"><p class="tm-name">${count} Workers Present</p><p class="tm-role">₹${(parseInt(count)*parseInt(wage)).toLocaleString('en-IN')} wages · ₹${parseInt(tea).toLocaleString('en-IN')} snacks</p></div>
+      <span class="status-badge approved">Done</span>`;
+    historyEl.prepend(item);
+  }
+
+  attendanceSubmitted = true;
+  showToast('Attendance submitted successfully! ✅');
+}
+
+// ─── ATTENDANCE CALENDAR ─── //
+function initAttendanceCalendar() {
+  const calEl = document.getElementById('attCalendar');
+  if (!calEl) return;
+  const today = new Date();
+  const year  = today.getFullYear();
+  const month = today.getMonth();
+  const monthLabel = today.toLocaleString('en-IN', { month: 'long', year: 'numeric' });
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  // Present days mock
+  const presentDays = [2,3,4,5,6,9,10,11,12,13,14,16,17,18,19,20,23,24,25,26,27];
+  const absentDays  = [7,8,15,21,22];
+
+  let html = `<p class="cal-month-label">${monthLabel}</p>`;
+  html += `<div class="cal-grid">`;
+  ['S','M','T','W','T','F','S'].forEach(d => { html += `<div class="cal-day-header">${d}</div>`; });
+  for (let i = 0; i < firstDay; i++) { html += `<div></div>`; }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const isToday   = d === today.getDate();
+    const isPresent = presentDays.includes(d);
+    const isAbsent  = absentDays.includes(d);
+    const isFuture  = d > today.getDate();
+    let cls = 'cal-day';
+    if (isToday)   cls += ' today';
+    else if (isPresent) cls += ' present';
+    else if (isAbsent)  cls += ' absent';
+    else if (isFuture)  cls += ' future';
+    html += `<div class="${cls}">${d}</div>`;
+  }
+  html += `</div>`;
+  html += `<div class="cal-legend"><span class="cal-dot present"></span>Present <span class="cal-dot absent"></span>Absent <span class="cal-dot today"></span>Today</div>`;
+  calEl.innerHTML = html;
+}
+
+// ─── SEARCH ─── //
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('projectSearch');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll('#projectsScreen .project-card').forEach(card => {
+        const name = card.querySelector('.proj-name')?.textContent?.toLowerCase() || '';
+        card.style.display = name.includes(query) ? '' : 'none';
+      });
+    });
+  }
+});
