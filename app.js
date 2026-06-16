@@ -164,6 +164,26 @@ function setStep(step) {
   
   const nextBtn = document.getElementById('cpNextBtn');
   if (nextBtn) nextBtn.textContent = step === totalSteps ? 'Save Project' : 'Next';
+
+  const prevBtn = document.getElementById('cpPrevBtn');
+  if (prevBtn) prevBtn.style.display = step > 1 ? 'block' : 'none';
+
+  const stepText = document.getElementById('cpStepText');
+  if (stepText) stepText.textContent = `Page ${step} of ${totalSteps}`;
+
+  for (let i = 1; i <= totalSteps; i++) {
+    const item = document.getElementById('vs-' + i);
+    const line = document.getElementById('vsl-' + i);
+    if (item) {
+      item.classList.remove('active', 'done');
+      if (i < step) item.classList.add('done');
+      if (i === step) item.classList.add('active');
+    }
+    if (line) {
+      line.classList.remove('done');
+      if (i < step) line.classList.add('done');
+    }
+  }
 }
 
 function resetWizard() {

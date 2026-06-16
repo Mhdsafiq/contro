@@ -259,6 +259,23 @@
     <div style="width:36px"></div>
   </div>
 
+  <div class="stepper-bar">
+    <div class="visual-stepper">
+      <div class="vs-item active" id="vs-1"><div class="vs-icon">🚧</div></div>
+      <div class="vs-line" id="vsl-1"></div>
+      <div class="vs-item" id="vs-2"><div class="vs-icon">🏗️</div></div>
+      <div class="vs-line" id="vsl-2"></div>
+      <div class="vs-item" id="vs-3"><div class="vs-icon">🏢</div></div>
+      <div class="vs-line" id="vsl-3"></div>
+      <div class="vs-item" id="vs-4"><div class="vs-icon">🎨</div></div>
+      <div class="vs-line" id="vsl-4"></div>
+      <div class="vs-item" id="vs-5"><div class="vs-icon">🏘️</div></div>
+    </div>
+    <div style="text-align:center; font-size:12px; font-weight:700; color:var(--primary); margin-top:12px;" id="cpStepText">
+      Page 1 of 5
+    </div>
+  </div>
+
   <div class="screen-body pad" style="padding-bottom:24px">
     <!-- STEP 1: PROJECT INFO -->
     <div class="step-pane active" id="step-1">
@@ -357,7 +374,8 @@
     </div>
   </div>
   <div class="step-footer">
-    <button class="btn-primary" id="cpNextBtn" onclick="nextStep()" style="width:100%;">Next</button>
+    <button class="btn-secondary" id="cpPrevBtn" onclick="prevStep()" style="flex:1; display:none; background:var(--bg-input); border:1px solid var(--border); color:var(--text-secondary); font-weight:700; border-radius:var(--radius-md);">Back</button>
+    <button class="btn-primary" id="cpNextBtn" onclick="nextStep()" style="flex:1;">Next</button>
   </div>
 </div>
 
