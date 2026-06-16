@@ -66,7 +66,7 @@ function updateBottomNav(screenId) {
   if (!currentRole) return;
 
   if (currentRole === 'company') {
-    const showOn = [...companyMainScreens, 'projectOverviewScreen', 'createProjectScreen', 'notificationsScreen'];
+    const showOn = [...companyMainScreens, 'projectOverviewScreen', 'notificationsScreen'];
     if (showOn.includes(screenId)) companyNav.classList.remove('hidden');
   } else if (currentRole === 'worker') {
     const showOn = [...workerMainScreens, 'leaveScreen', 'notificationsScreen', 'stockHubScreen'];
@@ -161,20 +161,9 @@ function setStep(step) {
   document.querySelectorAll('.step-pane').forEach(p => p.classList.remove('active'));
   const pane = document.getElementById('step-' + step);
   if (pane) pane.classList.add('active');
-  for (let i = 1; i <= totalSteps; i++) {
-    const si = document.getElementById('si-' + i);
-    if (!si) continue;
-    si.classList.remove('active', 'done');
-    if (i === step) si.classList.add('active');
-    else if (i < step) si.classList.add('done');
-  }
-  document.querySelectorAll('.stepper-bar .step-line').forEach((line, idx) => {
-    line.classList.toggle('done', idx < step - 1);
-  });
-  const backBtn = document.getElementById('cpBackBtn');
+  
   const nextBtn = document.getElementById('cpNextBtn');
-  if (backBtn) backBtn.style.display = step > 1 ? '' : 'none';
-  if (nextBtn) nextBtn.textContent = step === totalSteps ? 'Create Project' : 'Next';
+  if (nextBtn) nextBtn.textContent = step === totalSteps ? 'Save Project' : 'Next';
 }
 
 function resetWizard() {
@@ -397,6 +386,18 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('#overallStockList .stock-card').forEach(card => {
         const name = card.querySelector('.stk-name')?.textContent?.toLowerCase() || '';
         card.style.display = name.includes(query) ? '' : 'none';
+      });
+    });
+  }
+
+  // Worker Search Logic
+  const workerSearchInput = document.getElementById('workerSearch');
+  if (workerSearchInput) {
+    workerSearchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll('#workersScreen .worker-list-item').forEach(card => {
+        const name = card.querySelector('.tm-name')?.textContent?.toLowerCase() || '';
+        card.style.display = name.includes(query) ? 'flex' : 'none';
       });
     });
   }
