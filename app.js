@@ -372,3 +372,185 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// ─── STOCK HUB ─── //
+let currentUpdatingCard = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Prep dates on open Add Material sheet
+  const addStockBtn = document.querySelector('[onclick="openSheet(\'addStockSheet\')"]');
+  if(addStockBtn) {
+    addStockBtn.addEventListener('click', () => {
+      const d = new Date();
+      const dateEl = document.getElementById('newMatDate');
+      const timeEl = document.getElementById('newMatTime');
+      if(dateEl) dateEl.value = d.toISOString().split('T')[0];
+      if(timeEl) timeEl.value = d.toTimeString().substring(0, 5);
+    });
+  }
+
+  // Stock Search Logic
+  const stockSearchInput = document.getElementById('stockSearch');
+  if (stockSearchInput) {
+    stockSearchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll('#overallStockList .stock-card').forEach(card => {
+        const name = card.querySelector('.stk-name')?.textContent?.toLowerCase() || '';
+        card.style.display = name.includes(query) ? '' : 'none';
+      });
+    });
+  }
+});
+
+function saveNewMaterial() {
+  const name = document.getElementById('newMatName').value;
+  const qty = document.getElementById('newMatQty').value;
+  const unit = document.getElementById('newMatUnit').value;
+  const date = document.getElementById('newMatDate').value;
+  const time = document.getElementById('newMatTime').value;
+
+  if (!name || !qty) {
+    showToast('⚠ Please enter name and quantity');
+    return;
+  }
+
+  const list = document.getElementById('overallStockList');
+  if (list) {
+    const card = document.createElement('div');
+    card.className = 'stock-card';
+    card.setAttribute('onclick', `openUpdateStockSheet(this, '${name.replace(/'/g, "\\'")}', '${qty}', '${unit}')`);
+    
+    // Formatting date display
+    let dateStr = date;
+    try {
+      const d = new Date(date);
+      dateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+    } catch(e){}
+    
+    let timeStr = time;
+    try {
+       const [h,m] = time.split(':');
+       let hr = parseInt(h);
+       const ampm = hr >= 12 ? 'PM' : 'AM';
+       hr = hr % 12 || 12;
+       timeStr = `${hr}:${m} ${ampm}`;
+    } catch(e){}
+
+    card.innerHTML = `<div class="stock-info"><h4 class="stk-name">${name}</h4><p class="stk-meta">Material<br><span style="font-size:10px;color:var(--text-tertiary)">Last update: ${dateStr}, ${timeStr}</span></p></div><div class="stock-qty"><span class="val" style="color:var(--primary)">${qty}</span><span class="unit">${unit}</span><span class="stock-status" style="color:var(--success)">✓ Good</span></div>`;
+    list.prepend(card);
+  }
+  
+  // also add to daily added log
+  const dailyAddedList = document.getElementById('dailyAddedList');
+  if (dailyAddedList) {
+      const item = document.createElement('div');
+      item.className = 'stock-history-item';
+      item.style.cssText = 'display:flex; align-items:center; justify-content:space-between; padding:12px; background:var(--bg-input); border-radius:var(--radius-md); margin-bottom:12px;';
+      
+      let timeStr = time;
+      try {
+         const [h,m] = time.split(':');
+         let hr = parseInt(h);
+         const ampm = hr >= 12 ? 'PM' : 'AM';
+         hr = hr % 12 || 12;
+         timeStr = `${hr}:${m} ${ampm}`;
+      } catch(e){}
+      
+      item.innerHTML = `
+        <div style="display:flex; align-items:center; gap:12px;">
+           <div style="width:40px; height:40px; border-radius:50%; background:var(--success-surface); color:var(--success); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg></div>
+           <div><p style="font-weight:700; font-size:14px;">${name}</p><p style="font-size:12px; color:var(--text-tertiary);">Added · ${timeStr}</p></div>
+        </div>
+        <div style="text-align:right;"><p style="font-weight:800; font-size:16px; color:var(--success);">+${qty}</p><p style="font-size:11px; color:var(--text-tertiary);">${unit}</p></div>
+      `;
+      dailyAddedList.prepend(item);
+  }
+
+  closeSheet('addStockSheet');
+  document.getElementById('newMatName').value = '';
+  document.getElementById('newMatQty').value = '';
+  showToast('Material added successfully! ✅');
+}
+
+function openUpdateStockSheet(cardEl, name, currentQty, unit) {
+  currentUpdatingCard = cardEl;
+  document.getElementById('usTitle').textContent = `Update ${name}`;
+  document.getElementById('usCurrentQty').textContent = currentQty;
+  document.getElementById('usCurrentUnit').textContent = unit;
+  document.getElementById('usQuantity').value = '';
+  openSheet('updateStockSheet');
+}
+
+function applyStockUpdate() {
+  if (!currentUpdatingCard) return;
+  const qtyInput = document.getElementById('usQuantity').value;
+  if (!qtyInput) {
+    showToast('⚠ Please enter quantity');
+    return;
+  }
+  const diff = parseFloat(qtyInput);
+  const op = document.querySelector('input[name="usOp"]:checked').value;
+  
+  const qtyEl = currentUpdatingCard.querySelector('.val');
+  let currentQty = parseFloat(qtyEl.textContent);
+  
+  const name = currentUpdatingCard.querySelector('h4').textContent;
+  const unit = currentUpdatingCard.querySelector('.unit').textContent;
+
+  if (op === 'add') {
+    currentQty += diff;
+  } else {
+    currentQty -= diff;
+    if(currentQty < 0) currentQty = 0;
+  }
+  
+  qtyEl.textContent = currentQty;
+  
+  // update onclick attr
+  currentUpdatingCard.setAttribute('onclick', `openUpdateStockSheet(this, '${name.replace(/'/g, "\\'")}', '${currentQty}', '${unit}')`);
+  
+  // Update last modified
+  const meta = currentUpdatingCard.querySelector('.stk-meta span');
+  if(meta) {
+    const d = new Date();
+    const dateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+    let hr = d.getHours();
+    const ampm = hr >= 12 ? 'PM' : 'AM';
+    hr = hr % 12 || 12;
+    const m = d.getMinutes().toString().padStart(2, '0');
+    meta.textContent = `Last update: ${dateStr}, ${hr}:${m} ${ampm}`;
+  }
+
+  // add to history
+  const isAdd = op === 'add';
+  const targetList = document.getElementById(isAdd ? 'dailyAddedList' : 'dailyUsedList');
+  if (targetList) {
+      const item = document.createElement('div');
+      item.className = 'stock-history-item';
+      item.style.cssText = 'display:flex; align-items:center; justify-content:space-between; padding:12px; background:var(--bg-input); border-radius:var(--radius-md); margin-bottom:12px;';
+      
+      const d = new Date();
+      let hr = d.getHours();
+      const ampm = hr >= 12 ? 'PM' : 'AM';
+      hr = hr % 12 || 12;
+      const m = d.getMinutes().toString().padStart(2, '0');
+      const timeStr = `${hr}:${m} ${ampm}`;
+      
+      const icon = isAdd ? '<polyline points="20 6 9 17 4 12"/>' : '<line x1="5" y1="12" x2="19" y2="12"/>';
+      const color = isAdd ? 'var(--success)' : 'var(--error)';
+      const bg = isAdd ? 'var(--success-surface)' : 'var(--error-surface)';
+      const sign = isAdd ? '+' : '-';
+      
+      item.innerHTML = `
+        <div style="display:flex; align-items:center; gap:12px;">
+           <div style="width:40px; height:40px; border-radius:50%; background:${bg}; color:${color}; display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">${icon}</svg></div>
+           <div><p style="font-weight:700; font-size:14px;">${name}</p><p style="font-size:12px; color:var(--text-tertiary);">${isAdd ? 'Added More' : 'Stock Reduced'} · ${timeStr}</p></div>
+        </div>
+        <div style="text-align:right;"><p style="font-weight:800; font-size:16px; color:${color};">${sign}${diff}</p><p style="font-size:11px; color:var(--text-tertiary);">${unit}</p></div>
+      `;
+      targetList.prepend(item);
+  }
+
+  closeSheet('updateStockSheet');
+  showToast('Stock updated successfully! ✅');
+}
