@@ -133,7 +133,7 @@ html, body {
   min-height: 0;
   padding-bottom: calc(var(--bottomnav-h) + 16px);
 }
-.screen-body.pad { padding: var(--space-4); }
+.screen-body.pad { padding: var(--space-4); padding-bottom: calc(var(--bottomnav-h) + 16px); }
 .screen-body::-webkit-scrollbar { display: none; }
 
 /* ─── TOPBAR ─── */
@@ -729,6 +729,7 @@ html, body {
 .task-badge.progress { background: var(--info-surface); color: var(--info); }
 .task-badge.completed { background: var(--success-surface); color: var(--success); }
 .task-badge.blocked { background: var(--error-surface); color: var(--error); }
+.task-badge.cancelled { background: var(--bg-input); color: var(--text-tertiary); text-decoration: line-through; }
 
 /* ─── FILE ITEMS ─── */
 .file-item {
@@ -936,15 +937,16 @@ html, body {
   border-radius: var(--radius-md); padding: 14px;
   margin-bottom: var(--space-2); box-shadow: var(--shadow-xs);
 }
-.task-check {
-  width: 28px; height: 28px; border-radius: var(--radius-sm);
-  border: 2px solid var(--border); background: none;
+.task-checkbox {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid var(--border); background: var(--bg-input);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; transition: all 0.2s; flex-shrink: 0;
   color: transparent; margin-top: 2px;
 }
-.task-check.done { background: var(--success); border-color: var(--success); color: white; }
-.task-check.blocked { border-color: var(--error); color: var(--error); }
+.task-checkbox:active { transform: scale(0.9); }
+.task-checkbox.completed { background: var(--success); border-color: var(--success); color: white; }
+.task-checkbox.blocked { border-color: var(--error); color: var(--error); }
 .wtask-info { flex: 1; }
 .wtask-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
 .wtask-meta { font-size: 11px; color: var(--text-tertiary); }

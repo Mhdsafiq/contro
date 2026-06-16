@@ -386,7 +386,6 @@
   <div class="tab-bar" id="projTabBar">
     <button class="tab-btn active" onclick="switchTab(this,'tabOverview','projTabBar')">Overview</button>
     <button class="tab-btn" onclick="switchTab(this,'tabExpenses','projTabBar')">Expenses</button>
-    <button class="tab-btn" onclick="switchTab(this,'tabTasks','projTabBar')">Tasks</button>
     <button class="tab-btn" onclick="switchTab(this,'tabFiles','projTabBar')">Files</button>
   </div>
 
@@ -453,25 +452,6 @@
       <div class="expense-item"><div class="exp-icon" style="background:var(--accent-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#F57C00" stroke-width="2" width="18" height="18"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><div class="exp-info"><p class="exp-title">Tea & Snacks</p><p class="exp-meta">Daily refreshment</p></div><span class="exp-amount" style="color:var(--accent)">₹450</span></div>
       <div class="expense-item"><div class="exp-icon" style="background:var(--success-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" width="18" height="18"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div class="exp-info"><p class="exp-title">Material Expenses</p><p class="exp-meta">Cement, Sand, Steel</p></div><span class="exp-amount" style="color:var(--success)">₹0</span></div>
       <div class="expense-item"><div class="exp-icon" style="background:var(--error-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="exp-info"><p class="exp-title">Other Expenses</p><p class="exp-meta">Transport, Misc</p></div><span class="exp-amount" style="color:var(--error)">₹200</span></div>
-    </div>
-  </div>
-
-  <!-- Tab: Tasks -->
-  <div class="tab-pane" id="tabTasks">
-    <div class="screen-body pad">
-      <div class="chip-row" style="padding:0 0 12px 0">
-        <button class="chip active" onclick="filterChip(this)">All</button>
-        <button class="chip" onclick="filterChip(this)">Pending</button>
-        <button class="chip" onclick="filterChip(this)">In Progress</button>
-        <button class="chip" onclick="filterChip(this)">Completed</button>
-        <button class="chip" onclick="filterChip(this)">Blocked</button>
-      </div>
-      <div class="task-card"><div class="task-status-dot" style="background:var(--warning)"></div><div class="task-info"><p class="task-name">Install electrical conduits Floor 8</p><div class="task-details"><span>👤 Vimal R.</span><span>Floor 8 · Hall A</span></div></div><span class="task-badge pending">Pending</span></div>
-      <div class="task-card"><div class="task-status-dot" style="background:var(--info)"></div><div class="task-info"><p class="task-name">Plastering – Floors 9–11</p><div class="task-details"><span>👤 Raj Kumar</span><span>Floor 9-11</span></div></div><span class="task-badge progress">In Progress</span></div>
-      <div class="task-card"><div class="task-status-dot" style="background:var(--success)"></div><div class="task-info"><p class="task-name">Foundation & Footing</p><div class="task-details"><span>Completed Mar 10</span></div></div><span class="task-badge completed">Completed</span></div>
-      <div class="task-card"><div class="task-status-dot" style="background:var(--error)"></div><div class="task-info"><p class="task-name">Waterproofing – Terrace</p><div class="task-details"><span style="color:var(--error)">⚠ Material not delivered</span></div></div><span class="task-badge blocked">Blocked</span></div>
-      <div class="task-card"><div class="task-status-dot" style="background:var(--warning)"></div><div class="task-info"><p class="task-name">Tile work – 6th floor bathrooms</p><div class="task-details"><span>Room B3 · Floor 6</span></div></div><span class="task-badge pending">Pending</span></div>
-      <button class="btn-primary" style="margin-top:12px" onclick="openSheet('addTaskSheet')"><svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Add Task</button>
     </div>
   </div>
 
@@ -786,7 +766,7 @@
     <div class="quick-actions" style="padding:0 0 16px">
       <div class="qa-item" onclick="showScreen('workerAttendanceScreen')"><div class="qa-icon" style="background:var(--success-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" width="22" height="22"><path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 11l-5 5-2.5-2.5"/></svg></div><span>Mark Attendance</span></div>
       <div class="qa-item" onclick="showScreen('workerTasksScreen')"><div class="qa-icon" style="background:var(--info-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" width="22" height="22"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><span>My Tasks</span></div>
-      <div class="qa-item" onclick="showScreen('leaveScreen')"><div class="qa-icon" style="background:var(--accent-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#F57C00" stroke-width="2" width="22" height="22"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><span>Apply Leave</span></div>
+      <div class="qa-item" onclick="showScreen('workerLeaveHubScreen')"><div class="qa-icon" style="background:var(--accent-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#F57C00" stroke-width="2" width="22" height="22"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><span>Apply Leave</span></div>
       <div class="qa-item" onclick="showScreen('stockHubScreen')"><div class="qa-icon" style="background:#F3E8FF"><svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" width="22" height="22"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><span>Stock Hub</span></div>
     </div>
     <div class="section-pad" style="padding:0 0 10px"><h4 class="section-title">Assigned Projects</h4></div>
@@ -805,7 +785,47 @@
 ═══════════════════════════════════════ -->
 <div class="screen" id="workerTasksScreen">
   <div class="screen-topbar">
-    <div class="topbar-title">My Tasks</div>
+    <div class="topbar-title">Projects (Tasks)</div>
+    <div class="topbar-right"><button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+  </div>
+  <div class="screen-body pad">
+    <h4 class="att-form-title">Select Project</h4>
+    <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px">Tap a project to view and manage tasks.</p>
+    
+    <div class="summary-card" style="cursor:pointer;padding:16px" onclick="showScreen('workerProjectTasksListScreen')">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span class="proj-type-badge commercial" style="margin:0">Commercial</span>
+      </div>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px">Metro Towers Phase 2</h3>
+      <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:10px">12 Floors · Duplex · Chennai</p>
+      <div class="proj-progress-row"><span class="proj-pct">72%</span><div class="proj-progress-bar"><div class="proj-progress-fill" style="width:72%"></div></div></div>
+    </div>
+    
+    <div class="summary-card" style="cursor:pointer;padding:16px" onclick="showScreen('workerProjectTasksListScreen')">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span class="proj-type-badge residential" style="margin:0">Residential</span>
+      </div>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px">Green Valley Complex</h3>
+      <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:10px">8 Floors · Duplex · Madurai</p>
+      <div class="proj-progress-row"><span class="proj-pct">91%</span><div class="proj-progress-bar"><div class="proj-progress-fill" style="width:91%;background:linear-gradient(90deg,#F57C00,#FFB74D)"></div></div></div>
+    </div>
+    
+    <div class="summary-card" style="cursor:pointer;padding:16px" onclick="showScreen('workerProjectTasksListScreen')">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span class="proj-type-badge interior" style="margin:0">Interior</span>
+      </div>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px">Sunrise Villa Phase 3</h3>
+      <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:10px">5 Floors · Simplex · Coimbatore</p>
+      <div class="proj-progress-row"><span class="proj-pct">35%</span><div class="proj-progress-bar"><div class="proj-progress-fill" style="width:35%;background:linear-gradient(90deg,#7C3AED,#A78BFA)"></div></div></div>
+    </div>
+    <div style="height:16px"></div>
+  </div>
+</div>
+
+<div class="screen" id="workerProjectTasksListScreen">
+  <div class="screen-topbar">
+    <button class="btn-back" style="background:none;border:none;color:var(--text-main);cursor:pointer;margin-right:12px;" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+    <div class="topbar-title">Metro Towers Phase 2</div>
     <div class="topbar-right"><button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
   </div>
   <div class="screen-body pad">
@@ -815,23 +835,114 @@
       <button class="chip" onclick="filterChip(this)">In Progress</button>
       <button class="chip" onclick="filterChip(this)">Completed</button>
       <button class="chip" onclick="filterChip(this)">Blocked</button>
+      <button class="chip" onclick="filterChip(this)">Cancelled</button>
     </div>
-    <div class="worker-task-item">
-      <button class="task-check" onclick="toggleTaskCheck(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg></button>
-      <div class="wtask-info"><p class="wtask-name">Install electrical conduits Floor 8</p><p class="wtask-meta">Due: Jun 20 · <span style="color:var(--error);font-weight:600">High Priority</span></p></div>
+    
+    <div class="worker-task-item" style="border-left:3px solid var(--info)">
+      <div class="task-checkbox" onclick="openSheet('completeTaskSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="wtask-info" style="flex:1">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px">
+          <div>
+            <p class="wtask-name">Install electrical conduits Floor 8</p>
+            <p class="wtask-meta">Due: Jun 20 · <span style="color:var(--error);font-weight:600">High Priority</span></p>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <button class="icon-btn" style="padding:4px;color:var(--text-secondary);width:auto;height:auto;" onclick="openSheet('taskActionSheet')"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+            <span class="task-badge progress">In Progress</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="worker-task-item">
-      <button class="task-check" onclick="toggleTaskCheck(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg></button>
-      <div class="wtask-info"><p class="wtask-name">Tile work – 6th floor bathrooms</p><p class="wtask-meta">Due: Jun 28 · <span style="color:var(--success);font-weight:600">Low Priority</span></p></div>
+    
+    <div class="worker-task-item" style="border-left:3px solid var(--warning)">
+      <div class="task-checkbox" onclick="openSheet('completeTaskSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="wtask-info" style="flex:1">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px">
+          <div>
+            <p class="wtask-name">Tile work – 6th floor bathrooms</p>
+            <p class="wtask-meta">Due: Jun 28 · <span style="color:var(--success);font-weight:600">Low Priority</span></p>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <button class="icon-btn" style="padding:4px;color:var(--text-secondary);width:auto;height:auto;" onclick="openSheet('taskActionSheet')"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+            <span class="task-badge pending">Pending</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="worker-task-item">
-      <button class="task-check done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg></button>
-      <div class="wtask-info"><p class="wtask-name" style="text-decoration:line-through;opacity:0.5">Plastering – Floors 9–11</p><p class="wtask-meta" style="opacity:0.5">Completed today</p></div>
+    
+    <div class="worker-task-item" style="border-left:3px solid var(--success)">
+      <div class="task-checkbox completed"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="wtask-info" style="flex:1">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px">
+          <div>
+            <p class="wtask-name" style="text-decoration:line-through;color:var(--text-secondary);">Plastering – Floors 9–11</p>
+            <p class="wtask-meta" style="opacity:0.7">Verified ✓</p>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <button class="icon-btn" style="padding:4px;color:var(--text-secondary);width:auto;height:auto;" onclick="openSheet('taskActionSheet')"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+            <span class="task-badge completed">Completed</span>
+          </div>
+        </div>
+      </div>
     </div>
+    
+    <div class="worker-task-item" style="border-left:3px solid #7C3AED">
+      <div class="task-checkbox" onclick="openSheet('completeTaskSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+      <div class="wtask-info" style="flex:1">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px">
+          <div>
+            <p class="wtask-name">Foundation work – Block B</p>
+            <p class="wtask-meta">Photo uploaded · Waiting for Admin</p>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <button class="icon-btn" style="padding:4px;color:var(--text-secondary);width:auto;height:auto;" onclick="openSheet('taskActionSheet')"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+            <span class="task-badge" style="background:#F3E8FF;color:#7C3AED">Under Review</span>
+          </div>
+        </div>
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <div style="width:48px;height:36px;border-radius:6px;background:var(--bg-input);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="1.5" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="worker-task-item" style="border-left:3px solid var(--error)">
+      <div class="task-checkbox blocked" onclick="openSheet('completeTaskSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
+      <div class="wtask-info" style="flex:1">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px">
+          <div>
+            <p class="wtask-name">Steel column – 10th floor</p>
+            <p class="wtask-meta">Material shortage</p>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <button class="icon-btn" style="padding:4px;color:var(--text-secondary);width:auto;height:auto;" onclick="openSheet('taskActionSheet')"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+            <span class="task-badge blocked">Blocked</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="worker-task-item" style="border-left:3px solid var(--text-disabled);opacity:0.65">
+      <div class="task-checkbox" onclick="openSheet('completeTaskSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="wtask-info" style="flex:1">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px">
+          <div>
+            <p class="wtask-name" style="text-decoration:line-through">Paint exterior – South wall</p>
+            <p class="wtask-meta">Postponed</p>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <button class="icon-btn" style="padding:4px;color:var(--text-secondary);width:auto;height:auto;" onclick="openSheet('taskActionSheet')"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+            <span class="task-badge cancelled">Cancelled</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="height:16px"></div>
   </div>
 </div>
 
-<!-- WORKER ATTENDANCE SCREEN -->
+<!-- ═══════════════════════════════════════
+     WORKER ATTENDANCE — Assigned Projects
+═══════════════════════════════════════ -->
 <div class="screen" id="workerAttendanceScreen">
   <div class="screen-topbar">
     <div class="topbar-title">Attendance</div>
@@ -839,60 +950,388 @@
   </div>
   <div class="screen-body pad">
     <div class="attendance-hero">
-      <div class="att-greeting"><h3>Good Morning!</h3><p id="attDateText">Sunday, 15 June 2025</p></div>
+      <div class="att-greeting"><h3>Good Morning!</h3><p id="attDateText">Monday, 16 June 2025</p></div>
       <div class="att-time" id="attTimeText">09:00 AM</div>
     </div>
-    <div class="att-status-banner">
-      <div class="att-status-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="20" height="20"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-      <div class="att-status-text"><p class="att-status-label">Assigned Project</p><p class="att-status-value">Metro Towers Phase 2</p></div>
-      <span class="status-badge approved" style="flex-shrink:0">Active</span>
+    <h4 class="att-form-title">Select Project</h4>
+    <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px">Tap a project to mark attendance or view details.</p>
+    
+    <div class="summary-card" style="cursor:pointer;padding:16px" onclick="showScreen('workerProjDashScreen')">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span class="proj-type-badge commercial" style="margin:0">Commercial</span>
+        <span class="status-badge approved" style="font-size:9px">✅ Marked</span>
+      </div>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px">Metro Towers Phase 2</h3>
+      <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:10px">12 Floors · Duplex · Chennai</p>
+      <div class="proj-progress-row"><span class="proj-pct">72%</span><div class="proj-progress-bar"><div class="proj-progress-fill" style="width:72%"></div></div></div>
     </div>
-    <div class="att-form-card">
-      <h4 class="att-form-title">Submit Today's Attendance</h4>
-      <div class="field-group"><label class="field-label">Total Worker Count <span class="field-required">*</span></label><input class="field-input" type="number" id="attWorkerCount" placeholder="e.g. 15" min="1"></div>
-      <div class="field-row"><div class="field-group"><label class="field-label">Full Day</label><input class="field-input" type="number" placeholder="e.g. 12" min="0"></div><div class="field-group"><label class="field-label">Half Day</label><input class="field-input" type="number" placeholder="e.g. 3" min="0"></div></div>
-      <div class="field-group"><label class="field-label">Daily Wage per Worker</label><input class="field-input" type="number" id="attWage" placeholder="e.g. 800" value="800"></div>
-      <div class="field-group"><label class="field-label">Tea and Snacks Expense</label><input class="field-input" type="number" id="attTea" placeholder="e.g. 450" value="0"></div>
-      <div class="field-group"><label class="field-label">Group Photo</label><div class="upload-zone" style="padding:16px" onclick="showToast('Camera opened')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg><p>Tap to upload group photo</p><span>JPG, PNG up to 5MB</span></div></div>
-      <div class="field-group"><label class="field-label">Notes (Optional)</label><textarea class="field-input field-textarea" rows="2" placeholder="Any remarks for today..."></textarea></div>
-      <button class="btn-primary" id="attSubmitBtn" style="margin-top:8px" onclick="submitAttendance()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Submit Attendance</button>
+    
+    <div class="summary-card" style="cursor:pointer;padding:16px" onclick="showScreen('workerProjDashScreen')">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span class="proj-type-badge residential" style="margin:0">Residential</span>
+        <span class="status-badge pending" style="font-size:9px">❌ Not Marked</span>
+      </div>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px">Green Valley Complex</h3>
+      <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:10px">8 Floors · Duplex · Madurai</p>
+      <div class="proj-progress-row"><span class="proj-pct">91%</span><div class="proj-progress-bar"><div class="proj-progress-fill" style="width:91%;background:linear-gradient(90deg,#F57C00,#FFB74D)"></div></div></div>
     </div>
-    <div id="attTodaySummary"></div>
-    <h4 class="att-form-title" style="margin-top:20px;">Monthly Overview</h4>
-    <div class="att-calendar-card" id="attCalendar"></div>
-    <div class="summary-card" style="margin-top:12px;"><div class="summary-grid"><div class="summary-item" style="background:var(--success-surface)"><span class="summary-item-val" style="color:var(--success)">21</span><span class="summary-item-lbl">Present Days</span></div><div class="summary-item" style="background:var(--error-surface)"><span class="summary-item-val" style="color:var(--error)">5</span><span class="summary-item-lbl">Absent Days</span></div><div class="summary-item" style="background:var(--info-surface)"><span class="summary-item-val" style="color:var(--info)">3</span><span class="summary-item-lbl">Half Days</span></div><div class="summary-item" style="background:var(--accent-surface)"><span class="summary-item-val" style="color:var(--accent)">7.3L</span><span class="summary-item-lbl">Total Wages</span></div></div></div>
-    <h4 class="att-form-title" style="margin-top:20px;">History</h4>
-    <div id="attHistoryList">
-      <div class="att-history-item"><div class="att-date-badge"><span class="day">14</span><span class="month">Jun</span></div><div class="tm-info"><p class="tm-name">15 Workers Present</p><p class="tm-role">10,800 wages + 450 snacks</p></div><span class="status-badge approved">Done</span></div>
-      <div class="att-history-item"><div class="att-date-badge"><span class="day">13</span><span class="month">Jun</span></div><div class="tm-info"><p class="tm-name">14 Workers Present</p><p class="tm-role">10,200 wages + 400 snacks</p></div><span class="status-badge approved">Done</span></div>
-      <div class="att-history-item"><div class="att-date-badge"><span class="day">12</span><span class="month">Jun</span></div><div class="tm-info"><p class="tm-name">16 Workers Present</p><p class="tm-role">11,400 wages + 500 snacks</p></div><span class="status-badge approved">Done</span></div>
-      <div class="att-history-item"><div class="att-date-badge"><span class="day">11</span><span class="month">Jun</span></div><div class="tm-info"><p class="tm-name">13 Workers Present</p><p class="tm-role">9,500 wages + 380 snacks</p></div><span class="status-badge approved">Done</span></div>
-      <div class="att-history-item"><div class="att-date-badge"><span class="day">10</span><span class="month">Jun</span></div><div class="tm-info"><p class="tm-name">18 Workers Present</p><p class="tm-role">12,600 wages + 550 snacks</p></div><span class="status-badge approved">Done</span></div>
+    
+    <div class="summary-card" style="cursor:pointer;padding:16px" onclick="showScreen('workerProjDashScreen')">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span class="proj-type-badge interior" style="margin:0">Interior</span>
+        <span class="status-badge pending" style="font-size:9px">❌ Not Marked</span>
+      </div>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px">Sunrise Villa Phase 3</h3>
+      <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:10px">5 Floors · Simplex · Coimbatore</p>
+      <div class="proj-progress-row"><span class="proj-pct">35%</span><div class="proj-progress-bar"><div class="proj-progress-fill" style="width:35%;background:linear-gradient(90deg,#7C3AED,#A78BFA)"></div></div></div>
     </div>
     <div style="height:16px"></div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════
-     LEAVE MANAGEMENT
+     WORKER PROJECT DASHBOARD
 ═══════════════════════════════════════ -->
-<div class="screen" id="leaveScreen">
+<div class="screen" id="workerProjDashScreen">
+  <div class="proj-detail-hero">
+    <button class="btn-back" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="20" height="20"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+    <h2 class="proj-hero-name">Metro Towers Phase 2</h2>
+    <p class="proj-hero-meta">Commercial · 12 Floors · Chennai</p>
+    <div class="proj-hero-progress"><div class="hero-progress-bar"><div class="hero-progress-fill" style="width:72%"></div></div><span class="hero-pct">72% Complete</span></div>
+  </div>
+  <div class="screen-body pad">
+    <div class="section-pad" style="padding:0 0 10px"><h4 class="section-title">Quick Actions</h4></div>
+    <div class="quick-actions" style="padding:0 0 16px">
+      <div class="qa-item" onclick="showScreen('workerMarkAttScreen')"><div class="qa-icon" style="background:var(--success-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" width="22" height="22"><path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 11l-5 5-2.5-2.5"/></svg></div><span>Mark Attendance</span></div>
+      <div class="qa-item" onclick="showScreen('workerLeaveFormScreen')"><div class="qa-icon" style="background:var(--accent-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#F57C00" stroke-width="2" width="22" height="22"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><span>Apply Leave</span></div>
+    </div>
+    
+    <h4 class="att-form-title">Today's Attendance</h4>
+    <div class="summary-card" style="margin:0 0 16px">
+      <div class="summary-grid">
+        <div class="summary-item" style="background:var(--success-surface)"><span class="summary-item-val" style="color:var(--success)">✅</span><span class="summary-item-lbl">Present</span></div>
+        <div class="summary-item" style="background:var(--info-surface)"><span class="summary-item-val" style="color:var(--info)">15</span><span class="summary-item-lbl">Workers Today</span></div>
+      </div>
+    </div>
+    
+    <h4 class="att-form-title">Monthly Summary</h4>
+    <div class="summary-card" style="margin:0">
+      <div class="summary-grid">
+        <div class="summary-item" style="background:var(--success-surface)"><span class="summary-item-val" style="color:var(--success)">22</span><span class="summary-item-lbl">Present Days</span></div>
+        <div class="summary-item" style="background:var(--error-surface)"><span class="summary-item-val" style="color:var(--error)">3</span><span class="summary-item-lbl">Absent Days</span></div>
+        <div class="summary-item" style="background:var(--info-surface)"><span class="summary-item-val" style="color:var(--info)">₹3.2L</span><span class="summary-item-lbl">Labour Cost</span></div>
+        <div class="summary-item" style="background:var(--accent-surface)"><span class="summary-item-val" style="color:var(--accent)">₹12K</span><span class="summary-item-lbl">Other Exp.</span></div>
+      </div>
+    </div>
+    <div style="height:16px"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MARK ATTENDANCE
+═══════════════════════════════════════ -->
+<div class="screen" id="workerMarkAttScreen">
   <div class="inner-topbar">
     <button class="btn-back" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
-    <h2 class="inner-title">Leave Management</h2>
+    <h2 class="inner-title">Mark Attendance</h2>
+    <div style="width:36px"></div>
+  </div>
+  <div class="screen-body pad">
+    <div class="att-status-banner" style="border-left-color:var(--primary)">
+      <div class="att-status-icon" style="background:var(--primary)"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="20" height="20"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <div class="att-status-text"><p class="att-status-label">Date &amp; Time</p><p class="att-status-value" id="markAttDateTime">Mon, 16 Jun 2025 · 09:00 AM</p></div>
+    </div>
+    <div class="att-status-banner">
+      <div class="att-status-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="20" height="20"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="att-status-text"><p class="att-status-label">Project</p><p class="att-status-value">Metro Towers Phase 2</p></div>
+    </div>
+    
+    <div class="att-form-card">
+      <h4 class="att-form-title">📸 Your Selfie</h4>
+      <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px">Take a selfie to verify your presence at the site.</p>
+      <div class="upload-zone" style="padding:20px" onclick="showToast('Camera opened for selfie')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <p>Tap to take selfie</p>
+        <span>Photo will be sent to Admin for verification</span>
+      </div>
+    </div>
+    
+    <div class="att-form-card">
+      <h4 class="att-form-title">👷 Labour Count</h4>
+      <div class="field-group">
+        <label class="field-label">Total Workers <span class="field-required">*</span></label>
+        <input class="field-input" type="number" id="markAttTotal" placeholder="e.g. 15" min="1">
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Full Day</label><input class="field-input" type="number" id="markAttFull" placeholder="e.g. 12" min="0"></div>
+        <div class="field-group"><label class="field-label">Half Day</label><input class="field-input" type="number" id="markAttHalf" placeholder="e.g. 3" min="0"></div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Male Workers</label><input class="field-input" type="number" id="markAttMale" placeholder="e.g. 10" min="0"></div>
+        <div class="field-group"><label class="field-label">Female Workers</label><input class="field-input" type="number" id="markAttFemale" placeholder="e.g. 5" min="0"></div>
+      </div>
+      
+      <div class="field-group" style="margin-top:8px">
+        <label class="field-label">Group Photo</label>
+        <div class="upload-zone" style="padding:16px" onclick="showToast('Camera opened')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <p>Upload group photo of workers</p>
+          <span>Admin will verify this photo</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="att-form-card">
+      <div class="field-group">
+        <label class="field-label">Notes (Optional)</label>
+        <textarea class="field-input field-textarea" rows="2" placeholder="Any remarks for today..."></textarea>
+      </div>
+    </div>
+    
+    <button class="btn-primary" style="margin-top:8px;width:100%" onclick="submitMarkAttendance()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Submit Attendance
+    </button>
+    <div style="height:24px"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     DAILY CLOSURE REPORT
+═══════════════════════════════════════ -->
+<div class="screen" id="workerReportHubScreen">
+  <div class="screen-topbar">
+    <div class="topbar-title">Daily Reports</div>
+    <div class="topbar-right"><button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+  </div>
+  <div class="screen-body pad">
+    <h4 class="att-form-title">Select Project</h4>
+    <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px">Select a project to submit the daily closure report.</p>
+    
+    <div class="summary-card" style="cursor:pointer;padding:16px" onclick="showScreen('workerReportFormScreen')">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span class="proj-type-badge commercial" style="margin:0">Commercial</span>
+      </div>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px">Metro Towers Phase 2</h3>
+      <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:10px">12 Floors · Duplex · Chennai</p>
+      <div class="proj-progress-row"><span class="proj-pct">72%</span><div class="proj-progress-bar"><div class="proj-progress-fill" style="width:72%"></div></div></div>
+    </div>
+    
+    <div class="summary-card" style="cursor:pointer;padding:16px" onclick="showScreen('workerReportFormScreen')">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span class="proj-type-badge residential" style="margin:0">Residential</span>
+      </div>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px">Green Valley Complex</h3>
+      <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:10px">8 Floors · Duplex · Madurai</p>
+      <div class="proj-progress-row"><span class="proj-pct">91%</span><div class="proj-progress-bar"><div class="proj-progress-fill" style="width:91%;background:linear-gradient(90deg,#F57C00,#FFB74D)"></div></div></div>
+    </div>
+    
+    <div class="summary-card" style="cursor:pointer;padding:16px" onclick="showScreen('workerReportFormScreen')">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span class="proj-type-badge interior" style="margin:0">Interior</span>
+      </div>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:4px">Sunrise Villa Phase 3</h3>
+      <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:10px">5 Floors · Simplex · Coimbatore</p>
+      <div class="proj-progress-row"><span class="proj-pct">35%</span><div class="proj-progress-bar"><div class="proj-progress-fill" style="width:35%;background:linear-gradient(90deg,#7C3AED,#A78BFA)"></div></div></div>
+    </div>
+    <div style="height:16px"></div>
+  </div>
+</div>
+
+<div class="screen" id="workerReportFormScreen">
+  <div class="inner-topbar">
+    <button class="btn-back" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+    <h2 class="inner-title">Daily Closure Report</h2>
+    <div style="width:36px"></div>
+  </div>
+  <div class="screen-body pad">
+    <div class="att-status-banner" style="border-left-color:var(--primary)">
+      <div class="att-status-icon" style="background:var(--primary)"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="20" height="20"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <div class="att-status-text"><p class="att-status-label">Report Date</p><p class="att-status-value" id="reportDateTime">Mon, 16 Jun 2025</p></div>
+    </div>
+    <div class="att-status-banner">
+      <div class="att-status-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="20" height="20"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="att-status-text"><p class="att-status-label">Project</p><p class="att-status-value">Metro Towers Phase 2</p></div>
+    </div>
+    
+    <div class="att-form-card">
+      <h4 class="att-form-title">👷 Workforce Summary</h4>
+      <div class="field-group">
+        <label class="field-label">Total Workers Today</label>
+        <input class="field-input" type="number" id="rptTotal" placeholder="Auto from attendance" value="15" readonly style="background:var(--bg-input)">
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Male Workers</label><input class="field-input rpt-calc" type="number" id="rptMale" placeholder="e.g. 10" value="10"></div>
+        <div class="field-group"><label class="field-label">Female Workers</label><input class="field-input rpt-calc" type="number" id="rptFemale" placeholder="e.g. 5" value="5"></div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Full Day</label><input class="field-input rpt-calc" type="number" id="rptFullDay" placeholder="e.g. 12" value="12"></div>
+        <div class="field-group"><label class="field-label">Half Day</label><input class="field-input rpt-calc" type="number" id="rptHalfDay" placeholder="e.g. 3" value="3"></div>
+      </div>
+    </div>
+    
+    <div class="att-form-card">
+      <h4 class="att-form-title">💰 Wage Details</h4>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Male Full Day ₹</label><input class="field-input rpt-calc" type="number" id="rptMaleFullWage" value="800"></div>
+        <div class="field-group"><label class="field-label">Male Half Day ₹</label><input class="field-input rpt-calc" type="number" id="rptMaleHalfWage" value="400"></div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Female Full Day ₹</label><input class="field-input rpt-calc" type="number" id="rptFemaleFullWage" value="600"></div>
+        <div class="field-group"><label class="field-label">Female Half Day ₹</label><input class="field-input rpt-calc" type="number" id="rptFemaleHalfWage" value="300"></div>
+      </div>
+    </div>
+    <div class="att-form-card">
+      <h4 class="att-form-title">🧱 Material Usage</h4>
+      <div style="margin-bottom:12px;">
+        <p style="font-size:12px; color:var(--text-tertiary);">Select materials used from the project stock and enter the quantity.</p>
+      </div>
+      
+      <div class="field-row" style="margin-bottom:8px">
+        <div class="field-group" style="flex:2">
+          <label class="field-label">Material</label>
+          <select class="field-input">
+            <option value="" disabled selected>Select Material...</option>
+            <option>Cement (Bags)</option>
+            <option>River Sand (Units)</option>
+            <option>M-Sand (Units)</option>
+            <option>Bricks (Nos)</option>
+            <option>Steel 8mm (Kgs)</option>
+            <option>Steel 12mm (Kgs)</option>
+            <option>Paint (Liters)</option>
+          </select>
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Quantity</label>
+          <input class="field-input" type="number" placeholder="e.g. 50">
+        </div>
+      </div>
+
+      <button style="background:none; border:1px dashed var(--border); border-radius:var(--radius-sm); padding:10px; width:100%; color:var(--primary); font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; margin-top:4px;" onclick="showToast('Add material row')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Another Material
+      </button>
+    </div>
+    
+    <div class="att-form-card">
+      <h4 class="att-form-title">🧾 Expense Details</h4>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Tea &amp; Snacks ₹</label><input class="field-input rpt-calc" type="number" id="rptTea" value="450"></div>
+        <div class="field-group"><label class="field-label">Other Expenses ₹</label><input class="field-input rpt-calc" type="number" id="rptOther" value="200"></div>
+      </div>
+    </div>
+    
+    <div class="att-form-card" style="background:var(--bg-input);border:1px solid var(--border)">
+      <h4 style="font-size:12px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;margin-bottom:10px">💵 Expense Summary</h4>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)">
+        <span>Labour Cost</span><strong id="rptLabourCost">₹0</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)">
+        <span>Tea &amp; Snacks</span><strong id="rptTeaCost">₹0</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)">
+        <span>Other Expenses</span><strong id="rptOtherCost">₹0</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:15px;padding:10px 0 0;font-weight:800;color:var(--primary)">
+        <span>Total Daily Expense</span><strong id="rptTotalCost">₹0</strong>
+      </div>
+    </div>
+    
+    <div class="att-form-card">
+      <h4 class="att-form-title">📋 Task Summary</h4>
+      <div class="summary-grid">
+        <div class="summary-item" style="background:var(--success-surface)"><span class="summary-item-val" style="color:var(--success)">1</span><span class="summary-item-lbl">Completed</span></div>
+        <div class="summary-item" style="background:var(--accent-surface)"><span class="summary-item-val" style="color:var(--accent)">2</span><span class="summary-item-lbl">Pending</span></div>
+        <div class="summary-item" style="background:var(--info-surface)"><span class="summary-item-val" style="color:var(--info)">1</span><span class="summary-item-lbl">In Progress</span></div>
+        <div class="summary-item" style="background:var(--error-surface)"><span class="summary-item-val" style="color:var(--error)">1</span><span class="summary-item-lbl">Blocked</span></div>
+      </div>
+    </div>
+    
+    <button class="btn-primary" style="width:100%;margin-top:8px;padding:14px;font-size:15px" onclick="submitDailyReport()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Submit Report &amp; Sign Out
+    </button>
+    <p style="text-align:center;font-size:11px;color:var(--text-tertiary);margin-top:8px">Report will be sent to Admin for verification. You will be signed out after submission.</p>
+    
+    <div style="height:24px"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     LEAVE MANAGEMENT
+═══════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════
+     WORKER LEAVE HUB (Project List)
+═══════════════════════════════════════ -->
+<div class="screen" id="workerLeaveHubScreen">
+  <div class="screen-topbar">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <button onclick="goBack()" style="background:none; border:none; color:white; cursor:pointer; padding:0; display:flex; align-items:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="22" height="22"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+      <div class="topbar-title">Apply Leave</div>
+    </div>
+    <div></div>
+  </div>
+  <div class="screen-body pad" style="padding-top:16px;">
+    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">Select a project to apply for leave.</p>
+
+    <!-- Project 1 -->
+    <div class="project-card" onclick="showScreen('workerLeaveFormScreen')" style="cursor:pointer">
+      <div class="project-card-header">
+        <div>
+          <span class="project-tag">COMMERCIAL</span>
+          <h3 class="project-title" style="font-size:16px;">Metro Towers Phase 2</h3>
+        </div>
+        <div class="status-dot"></div>
+      </div>
+      <div class="project-card-meta">12 Floors · Duplex · Chennai</div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card" onclick="showScreen('workerLeaveFormScreen')" style="cursor:pointer">
+      <div class="project-card-header">
+        <div>
+          <span class="project-tag" style="background:#E0F2FE;color:#0284C7">RESIDENTIAL</span>
+          <h3 class="project-title" style="font-size:16px;">Green Residency</h3>
+        </div>
+        <div class="status-dot"></div>
+      </div>
+      <div class="project-card-meta">4 Blocks · Apartments · OMR</div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card" onclick="showScreen('workerLeaveFormScreen')" style="cursor:pointer">
+      <div class="project-card-header">
+        <div>
+          <span class="project-tag" style="background:#F3E8FF;color:#7C3AED">COMMERCIAL</span>
+          <h3 class="project-title" style="font-size:16px;">Sky Heights</h3>
+        </div>
+        <div class="status-dot"></div>
+      </div>
+      <div class="project-card-meta">Tech Park · Guindy</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     WORKER LEAVE FORM
+═══════════════════════════════════════ -->
+<div class="screen" id="workerLeaveFormScreen">
+  <div class="inner-topbar">
+    <button class="btn-back" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+    <h2 class="inner-title">Leave Request</h2>
     <div style="width:36px"></div>
   </div>
   <div class="screen-body pad">
     <div class="att-form-card">
-      <h4 class="att-form-title">Apply Leave</h4>
+      <h4 class="att-form-title">Metro Towers Phase 2</h4>
+      <p style="font-size:12px; color:var(--text-tertiary); margin-bottom:16px; margin-top:-8px;">Submit your leave request for this project.</p>
+      
       <div class="field-group"><label class="field-label">Leave Date <span class="field-required">*</span></label><input class="field-input" type="date"></div>
       <div class="field-group"><label class="field-label">Leave Reason <span class="field-required">*</span></label><textarea class="field-input field-textarea" rows="3" placeholder="Enter reason for leave"></textarea></div>
-      <button class="btn-primary" style="margin-top:8px" onclick="showToast('Leave request submitted!')">Submit Leave Request</button>
+      <button class="btn-primary" style="margin-top:8px" onclick="goBack(); showToast('Leave request submitted!')">Submit Leave Request</button>
     </div>
-    <h4 class="att-form-title" style="margin-top:20px;">Leave History</h4>
+    
+    <h4 class="att-form-title" style="margin-top:20px;">Leave History (Metro Towers)</h4>
     <div class="leave-card"><div class="leave-header"><div><p class="leave-title">Personal Leave</p><p class="leave-dates">Jun 5 – Jun 7, 2025</p></div><span class="status-badge pending">Pending</span></div><p class="leave-reason">Family function at hometown</p></div>
     <div class="leave-card"><div class="leave-header"><div><p class="leave-title">Sick Leave</p><p class="leave-dates">May 20, 2025</p></div><span class="status-badge approved">Approved</span></div><p class="leave-reason">Fever and cold</p></div>
-    <div class="leave-card"><div class="leave-header"><div><p class="leave-title">Casual Leave</p><p class="leave-dates">Apr 15, 2025</p></div><span class="status-badge rejected">Rejected</span></div><p class="leave-reason">Travel plans</p></div>
   </div>
 </div>
 
@@ -1003,8 +1442,9 @@
 <!-- Worker Bottom Nav -->
 <div class="bottom-nav hidden" id="workerNav">
   <button class="nav-item active" onclick="switchBottomNav(this,'workerDashScreen','workerNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Dashboard</span></button>
-  <button class="nav-item" onclick="switchBottomNav(this,'workerTasksScreen','workerNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span>Tasks</span></button>
   <button class="nav-item" onclick="switchBottomNav(this,'workerAttendanceScreen','workerNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 11l-5 5-2.5-2.5"/></svg><span>Attendance</span></button>
+  <button class="nav-item" onclick="switchBottomNav(this,'workerTasksScreen','workerNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span>Tasks</span></button>
+  <button class="nav-item" onclick="switchBottomNav(this,'workerReportHubScreen','workerNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><span>Report</span></button>
   <button class="nav-item" onclick="switchBottomNav(this,'workerProfileScreen','workerNav')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span>Settings</span></button>
 </div>
 
@@ -1162,6 +1602,52 @@
      TOAST
 ═══════════════════════════════════════ -->
 <div class="toast-container"><div class="toast" id="toastEl"></div></div>
+
+<!-- Complete Task Sheet -->
+<div class="sheet-overlay" id="completeTaskSheetOverlay" onclick="closeSheet('completeTaskSheet')"></div>
+<div class="bottom-sheet" id="completeTaskSheet">
+  <div class="sheet-drag"></div>
+  <div class="sheet-head"><h3>Complete Task</h3><button class="sheet-close" onclick="closeSheet('completeTaskSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="sheet-body pad" style="padding-bottom:24px;">
+    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">You can optionally add a photo or comment before submitting.</p>
+    
+    <label class="field-label">Proof (Optional)</label>
+    <div style="display:flex; gap:12px; margin-bottom:16px;">
+      <div class="upload-zone" style="flex:1; padding:16px; text-align:center;" onclick="showToast('Camera opened to capture photo')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24" style="margin-bottom:8px;color:var(--text-tertiary)"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <p style="font-weight:600; font-size:12px;">Capture Photo</p>
+      </div>
+      <div class="upload-zone" style="flex:1; padding:16px; text-align:center;" onclick="showToast('Gallery opened to select photo')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24" style="margin-bottom:8px;color:var(--text-tertiary)"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <p style="font-weight:600; font-size:12px;">Upload Photo</p>
+      </div>
+    </div>
+    
+    <div class="field-group">
+      <label class="field-label">Comments (Optional)</label>
+      <textarea class="field-input field-textarea" rows="2" placeholder="e.g. Completed without issues"></textarea>
+    </div>
+  </div>
+  <div class="sheet-footer"><button class="btn-primary" onclick="closeSheet('completeTaskSheet'); showToast('Task marked as Completed!')"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="18" height="18" style="margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>Submit</button></div>
+</div>
+
+<!-- Task Action Sheet -->
+<div class="sheet-overlay" id="taskActionSheetOverlay" onclick="closeSheet('taskActionSheet')"></div>
+<div class="bottom-sheet" id="taskActionSheet">
+  <div class="sheet-drag"></div>
+  <div class="sheet-head"><h3>Task Actions</h3><button class="sheet-close" onclick="closeSheet('taskActionSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="sheet-body pad" style="padding-bottom:24px;display:flex;flex-direction:column;gap:12px;">
+    <button style="width:100%;text-align:left;padding:12px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:12px;font-weight:600;color:var(--text-main);display:flex;align-items:center;gap:12px;" onclick="closeSheet('taskActionSheet'); showToast('Task assigned!')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Assign Worker
+    </button>
+    <button style="width:100%;text-align:left;padding:12px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:12px;font-weight:600;color:var(--warning);display:flex;align-items:center;gap:12px;" onclick="closeSheet('taskActionSheet'); showToast('Task Blocked!')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Mark as Blocked
+    </button>
+    <button style="width:100%;text-align:left;padding:12px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:12px;font-weight:600;color:var(--error);display:flex;align-items:center;gap:12px;" onclick="closeSheet('taskActionSheet'); showToast('Task Cancelled!')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Cancel Task
+    </button>
+  </div>
+</div>
 
 </div><!-- end app-shell -->
 <script src="app.js"></script>

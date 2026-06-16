@@ -51,7 +51,7 @@ function goBack() {
 
 // ─── BOTTOM NAV ─── //
 const companyMainScreens  = ['projectsScreen', 'dashboardScreen', 'stockHubScreen', 'workersScreen', 'profileScreen'];
-const workerMainScreens   = ['workerDashScreen', 'workerTasksScreen', 'workerAttendanceScreen', 'workerProfileScreen'];
+const workerMainScreens   = ['workerAttendanceScreen', 'workerTasksScreen', 'workerDashScreen', 'workerProfileScreen', 'workerReportHubScreen', 'workerProjDashScreen', 'workerMarkAttScreen', 'workerDailyReportScreen', 'workerReportFormScreen', 'workerProjectTasksListScreen'];
 const clientMainScreens   = ['clientOverviewScreen', 'clientProfileScreen'];
 
 function updateBottomNav(screenId) {
@@ -69,7 +69,7 @@ function updateBottomNav(screenId) {
     const showOn = [...companyMainScreens, 'projectOverviewScreen', 'notificationsScreen'];
     if (showOn.includes(screenId)) companyNav.classList.remove('hidden');
   } else if (currentRole === 'worker') {
-    const showOn = [...workerMainScreens, 'leaveScreen', 'notificationsScreen', 'stockHubScreen'];
+    const showOn = [...workerMainScreens, 'workerLeaveHubScreen', 'workerLeaveFormScreen', 'notificationsScreen', 'stockHubScreen'];
     if (showOn.includes(screenId)) workerNav.classList.remove('hidden');
   } else if (currentRole === 'client') {
     if (clientMainScreens.includes(screenId)) clientNav.classList.remove('hidden');
@@ -565,4 +565,46 @@ function applyStockUpdate() {
 
   closeSheet('updateStockSheet');
   showToast('Stock updated successfully! ✅');
+}
+
+// ─── WORKER PORTAL HELPERS ─── //
+
+function submitMarkAttendance() {
+  const total = document.getElementById('markAttTotal').value;
+  if (!total) {
+    showToast('Please enter total workers count');
+    return;
+  }
+  showToast('Attendance Marked & Sent for Verification!');
+  goBack();
+}
+
+function calcReportExpenses() {
+  const mFull = (parseInt(document.getElementById('rptMale').value)||0) * (parseInt(document.getElementById('rptMaleFullWage').value)||0);
+  const mHalf = 0; // Keeping simple for demo
+  const fFull = (parseInt(document.getElementById('rptFemale').value)||0) * (parseInt(document.getElementById('rptFemaleFullWage').value)||0);
+  const fHalf = 0; 
+  
+  const totalLabour = mFull + mHalf + fFull + fHalf;
+  const tea = parseInt(document.getElementById('rptTea').value)||0;
+  const other = parseInt(document.getElementById('rptOther').value)||0;
+  
+  const total = totalLabour + tea + other;
+  
+  document.getElementById('rptLabourCost').innerText = '₹' + totalLabour.toLocaleString('en-IN');
+  document.getElementById('rptTeaCost').innerText = '₹' + tea.toLocaleString('en-IN');
+  document.getElementById('rptOtherCost').innerText = '₹' + other.toLocaleString('en-IN');
+  document.getElementById('rptTotalCost').innerText = '₹' + total.toLocaleString('en-IN');
+}
+
+// Attach listener to calculate inputs
+document.querySelectorAll('.rpt-calc').forEach(el => {
+  el.addEventListener('input', calcReportExpenses);
+});
+
+function submitDailyReport() {
+  showToast('Daily Report Submitted & Verified. Signing out...');
+  setTimeout(() => {
+    logout();
+  }, 1500);
 }
