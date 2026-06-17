@@ -393,55 +393,60 @@
   <div class="tab-pane active" id="tabOverview">
     <div class="screen-body pad">
       
-      <!-- Project Progress Milestone Graph -->
-      <div class="summary-card" style="padding-bottom:20px; overflow:hidden;">
-        <h4 style="font-size:13px; font-weight:700; margin-bottom:16px;">📈 Project Timeline & Progress</h4>
-        
-        <div style="position:relative; margin-top:20px; margin-bottom:10px;">
-          <!-- Track background line -->
-          <div style="position:absolute; top:8px; left:10%; right:10%; height:3px; background:var(--border-light); z-index:1;"></div>
-          <!-- Track active line -->
-          <div style="position:absolute; top:8px; left:10%; width:50%; height:3px; background:var(--primary); z-index:2;"></div>
-          
-          <!-- Milestones -->
-          <div style="display:flex; justify-content:space-between; position:relative; z-index:3;">
-            
-            <!-- Milestone 1 -->
-            <div style="display:flex; flex-direction:column; align-items:center; width:20%;">
-              <div style="width:18px; height:18px; border-radius:50%; background:var(--primary); border:3px solid var(--bg-card); box-shadow:0 0 0 1px var(--primary);"></div>
-              <p style="font-size:10px; font-weight:600; color:var(--text-primary); margin-top:8px; text-align:center;">Project Start</p>
+      <!-- Project Progress Line Graph -->
+      <div class="summary-card" style="padding-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div>
+            <p style="font-size:12px; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Total Spent (Till Date)</p>
+            <div style="display:flex; align-items:baseline; gap:4px;">
+              <h3 style="font-size:26px; font-weight:800; color:var(--text-primary);">₹ 45.2L</h3>
+              <span style="font-size:14px; font-weight:600; color:var(--text-tertiary);">/ 80L</span>
             </div>
-            
-            <!-- Milestone 2 -->
-            <div style="display:flex; flex-direction:column; align-items:center; width:20%;">
-              <div style="width:18px; height:18px; border-radius:50%; background:var(--primary); border:3px solid var(--bg-card); box-shadow:0 0 0 1px var(--primary);"></div>
-              <p style="font-size:10px; font-weight:600; color:var(--text-primary); margin-top:8px; text-align:center;">Phase 1<br>Complete</p>
-            </div>
-            
-            <!-- Milestone 3 -->
-            <div style="display:flex; flex-direction:column; align-items:center; width:20%;">
-              <div style="width:18px; height:18px; border-radius:50%; background:var(--primary); border:3px solid var(--bg-card); box-shadow:0 0 0 1px var(--primary);"></div>
-              <p style="font-size:10px; font-weight:600; color:var(--text-primary); margin-top:8px; text-align:center;">Phase 2<br>Complete</p>
-            </div>
-            
-            <!-- Milestone 4 -->
-            <div style="display:flex; flex-direction:column; align-items:center; width:20%;">
-              <!-- current active milestone -->
-              <div style="width:18px; height:18px; border-radius:50%; background:var(--bg-card); border:3px solid var(--primary); box-shadow:0 0 0 1px var(--primary);"></div>
-              <p style="font-size:10px; font-weight:700; color:var(--primary); margin-top:8px; text-align:center;">Phase 3<br>(Current)</p>
-            </div>
-            
-            <!-- Milestone 5 -->
-            <div style="display:flex; flex-direction:column; align-items:center; width:20%;">
-              <div style="width:18px; height:18px; border-radius:50%; background:var(--bg-card); border:3px solid var(--border-light); box-shadow:0 0 0 1px var(--border-light);"></div>
-              <p style="font-size:10px; font-weight:600; color:var(--text-tertiary); margin-top:8px; text-align:center;">Target<br>Completion</p>
-            </div>
-
+          </div>
+          <div style="background:#D1FAE5; color:#059669; font-size:12px; font-weight:700; padding:6px 12px; border-radius:16px;">
+            Under Budget
           </div>
         </div>
-
-        <div style="text-align:center; margin-top:20px;">
-          <span style="font-size:12px; font-weight:700; color:var(--primary); background:var(--primary-surface); padding:4px 12px; border-radius:12px;">Overall Progress: 72%</span>
+        
+        <p style="font-size:14px; font-weight:600; color:var(--text-secondary); margin-top:20px; margin-bottom:12px;">Project Completion Progress</p>
+        
+        <div style="position:relative; width:100%; height:140px;">
+          <!-- Horizontal Dashed Line -->
+          <div style="position:absolute; top:65%; left:0; width:100%; height:1px; border-top:2px dashed var(--border-light);"></div>
+          
+          <!-- SVG Graph -->
+          <svg viewBox="0 0 300 120" style="width:100%; height:100%; overflow:visible;">
+            <defs>
+              <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.05"/>
+              </linearGradient>
+            </defs>
+            
+            <!-- Area Fill -->
+            <path d="M 10,95 L 66,80 L 122,85 L 178,50 L 234,35 L 290,15 L 290,110 L 10,110 Z" fill="url(#chartFill)" />
+            
+            <!-- Line -->
+            <path d="M 10,95 L 66,80 L 122,85 L 178,50 L 234,35 L 290,15" fill="none" stroke="#06B6D4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            
+            <!-- Points -->
+            <circle cx="10" cy="95" r="4" fill="white" stroke="#06B6D4" stroke-width="2.5" />
+            <circle cx="66" cy="80" r="4" fill="white" stroke="#06B6D4" stroke-width="2.5" />
+            <circle cx="122" cy="85" r="4" fill="white" stroke="#06B6D4" stroke-width="2.5" />
+            <circle cx="178" cy="50" r="4" fill="white" stroke="#06B6D4" stroke-width="2.5" />
+            <circle cx="234" cy="35" r="4" fill="white" stroke="#06B6D4" stroke-width="2.5" />
+            <circle cx="290" cy="15" r="5" fill="white" stroke="#06B6D4" stroke-width="3.5" />
+          </svg>
+          
+          <!-- X Axis Labels -->
+          <div style="display:flex; justify-content:space-between; margin-top:8px; padding:0 2px;">
+            <span style="font-size:11px; color:var(--text-tertiary); font-weight:600;">Jan</span>
+            <span style="font-size:11px; color:var(--text-tertiary); font-weight:600;">Feb</span>
+            <span style="font-size:11px; color:var(--text-tertiary); font-weight:600;">Mar</span>
+            <span style="font-size:11px; color:var(--text-tertiary); font-weight:600;">Apr</span>
+            <span style="font-size:11px; color:var(--text-tertiary); font-weight:600;">May</span>
+            <span style="font-size:11px; color:#06B6D4; font-weight:800;">Jun (72%)</span>
+          </div>
         </div>
       </div>
       <!-- Today's Summary with Date Nav -->
