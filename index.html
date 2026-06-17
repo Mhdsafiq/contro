@@ -411,26 +411,13 @@
       <!-- Project Progress -->
       <div class="summary-card" style="padding-bottom:32px;">
         <h4 style="font-size:13px; font-weight:700; margin-bottom:16px;">📈 Project Progress</h4>
-        <div class="progress-graph">
-          <div class="progress-line"></div>
-          <div class="progress-line-fill" style="width: 72%;"></div>
-          
-          <div class="progress-step completed">
-            <div class="progress-dot">✓</div>
-            <span class="progress-label" style="left:-10px">Foundation<br><span style="font-weight:400;color:var(--text-tertiary)">100%</span></span>
-          </div>
-          <div class="progress-step completed">
-            <div class="progress-dot">✓</div>
-            <span class="progress-label" style="left:-10px">Structure<br><span style="font-weight:400;color:var(--text-tertiary)">100%</span></span>
-          </div>
-          <div class="progress-step current">
-            <div class="progress-dot">72</div>
-            <span class="progress-label" style="left:-15px">Finishing<br><span style="font-weight:400;color:var(--text-tertiary)">In Progress</span></span>
-          </div>
-          <div class="progress-step">
-            <div class="progress-dot"></div>
-            <span class="progress-label" style="right:-10px;text-align:right">Handover<br><span style="font-weight:400;color:var(--text-tertiary)">Pending</span></span>
-          </div>
+        <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:600; color:var(--text-tertiary); margin-bottom:6px;">
+          <span>0%</span>
+          <span>Project Progress: 65%</span>
+          <span>100%</span>
+        </div>
+        <div style="width:100%; height:8px; background:var(--bg-input); border-radius:4px; overflow:hidden;">
+          <div style="width:65%; height:100%; background:var(--primary); border-radius:4px;"></div>
         </div>
       </div>
 
@@ -452,7 +439,6 @@
       <div class="summary-card">
         <div class="section-header">
           <h4 style="font-size:13px; font-weight:700;">👷 Team Members</h4>
-          <button class="btn-text" onclick="openSheet('assignWorkerSheet')">+ Assign</button>
         </div>
         
         <div class="team-card" style="margin-bottom:8px;box-shadow:none;border:1px solid var(--border-light)">
@@ -460,7 +446,6 @@
           <div class="tm-info" style="cursor:pointer;" onclick="showScreen('userProfileScreen')"><p class="tm-name">Raj Kumar</p><p class="tm-role">Site Engineer</p></div>
           <div style="display:flex; gap:6px;">
             <button class="action-btn-sm chat" onclick="showScreen('chatScreen')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></button>
-            <button class="action-btn-sm delete" onclick="showToast('Removed Raj Kumar')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
           </div>
         </div>
 
@@ -469,7 +454,6 @@
           <div class="tm-info" style="cursor:pointer;" onclick="showScreen('userProfileScreen')"><p class="tm-name">Suresh K.</p><p class="tm-role">Supervisor</p></div>
           <div style="display:flex; gap:6px;">
             <button class="action-btn-sm chat" onclick="showScreen('chatScreen')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></button>
-            <button class="action-btn-sm delete" onclick="showToast('Removed Suresh K.')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
           </div>
         </div>
 
@@ -478,7 +462,6 @@
           <div class="tm-info" style="cursor:pointer;" onclick="showScreen('userProfileScreen')"><p class="tm-name">Prakash M.</p><p class="tm-role">Worker</p></div>
           <div style="display:flex; gap:6px;">
             <button class="action-btn-sm chat" onclick="showScreen('chatScreen')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></button>
-            <button class="action-btn-sm delete" onclick="showToast('Removed Prakash M.')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
           </div>
         </div>
       </div>
@@ -504,37 +487,24 @@
       </div>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
         <h4 style="font-size:12px; font-weight:700; color:var(--text-tertiary); text-transform:uppercase;">Breakdown</h4>
-        <button onclick="openSheet('addExpenseSheet')" style="background:var(--primary-surface); color:var(--primary); border:none; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:700; display:flex; align-items:center; gap:4px; cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add</button>
       </div>
 
-      <div class="expense-item" style="position:relative; padding-right:60px;">
+      <div class="expense-item">
         <div class="exp-icon" style="background:var(--info-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" width="18" height="18"><path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/></svg></div>
         <div class="exp-info"><p class="exp-title">Labour Wages</p><p class="exp-meta">Full day × 12, Half day × 3</p></div>
-        <span class="exp-amount" style="color:var(--primary); position:absolute; right:60px; top:14px;">₹10,800</span>
-        <div style="position:absolute; right:12px; top:12px; display:flex; gap:4px;">
-          <button class="action-btn-sm" style="width:24px; height:24px;" onclick="openSheet('addExpenseSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-          <button class="action-btn-sm delete" style="width:24px; height:24px;" onclick="showToast('Expense Removed')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        </div>
+        <span class="exp-amount" style="color:var(--primary)">₹10,800</span>
       </div>
 
-      <div class="expense-item" style="position:relative; padding-right:60px;">
+      <div class="expense-item">
         <div class="exp-icon" style="background:var(--accent-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#F57C00" stroke-width="2" width="18" height="18"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
         <div class="exp-info"><p class="exp-title">Tea & Snacks</p><p class="exp-meta">Daily refreshment</p></div>
-        <span class="exp-amount" style="color:var(--accent); position:absolute; right:60px; top:14px;">₹450</span>
-        <div style="position:absolute; right:12px; top:12px; display:flex; gap:4px;">
-          <button class="action-btn-sm" style="width:24px; height:24px;" onclick="openSheet('addExpenseSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-          <button class="action-btn-sm delete" style="width:24px; height:24px;" onclick="showToast('Expense Removed')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        </div>
+        <span class="exp-amount" style="color:var(--accent)">₹450</span>
       </div>
 
-      <div class="expense-item" style="position:relative; padding-right:60px;">
+      <div class="expense-item">
         <div class="exp-icon" style="background:var(--error-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
         <div class="exp-info"><p class="exp-title">Other Expenses</p><p class="exp-meta">Transport, Misc</p></div>
-        <span class="exp-amount" style="color:var(--error); position:absolute; right:60px; top:14px;">₹200</span>
-        <div style="position:absolute; right:12px; top:12px; display:flex; gap:4px;">
-          <button class="action-btn-sm" style="width:24px; height:24px;" onclick="openSheet('addExpenseSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-          <button class="action-btn-sm delete" style="width:24px; height:24px;" onclick="showToast('Expense Removed')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        </div>
+        <span class="exp-amount" style="color:var(--error)">₹200</span>
       </div>
     </div>
   </div>
@@ -542,30 +512,24 @@
   <!-- Tab: Files -->
   <div class="tab-pane" id="tabFiles">
     <div class="screen-body pad">
-      <button class="btn-secondary" style="margin-bottom:16px" onclick="openSheet('uploadFileSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload Files</button>
-      
-      <div class="file-item" style="position:relative; padding-right:40px;">
+      <div class="file-item">
         <div class="file-icon pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
         <div class="file-info"><p class="file-name">Floor_Plan_B2.pdf</p><p class="file-meta">2.4 MB · Jun 1, 2025</p></div>
-        <button class="action-btn-sm delete" style="position:absolute; right:12px; top:12px; width:28px; height:28px; border:none; background:none; color:var(--text-tertiary);" onclick="showToast('File deleted')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
 
-      <div class="file-item" style="position:relative; padding-right:40px;">
+      <div class="file-item">
         <div class="file-icon img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
         <div class="file-info"><p class="file-name">Site_Photo_May30.jpg</p><p class="file-meta">1.8 MB · May 30, 2025</p></div>
-        <button class="action-btn-sm delete" style="position:absolute; right:12px; top:12px; width:28px; height:28px; border:none; background:none; color:var(--text-tertiary);" onclick="showToast('File deleted')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
 
-      <div class="file-item" style="position:relative; padding-right:40px;">
+      <div class="file-item">
         <div class="file-icon doc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
         <div class="file-info"><p class="file-name">Contract_Agreement.docx</p><p class="file-meta">560 KB · Jan 5, 2025</p></div>
-        <button class="action-btn-sm delete" style="position:absolute; right:12px; top:12px; width:28px; height:28px; border:none; background:none; color:var(--text-tertiary);" onclick="showToast('File deleted')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
 
-      <div class="file-item" style="position:relative; padding-right:40px;">
+      <div class="file-item">
         <div class="file-icon video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
         <div class="file-info"><p class="file-name">Drone_Survey.mp4</p><p class="file-meta">45.2 MB · May 15, 2025</p></div>
-        <button class="action-btn-sm delete" style="position:absolute; right:12px; top:12px; width:28px; height:28px; border:none; background:none; color:var(--text-tertiary);" onclick="showToast('File deleted')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
     </div>
   </div>
@@ -1763,6 +1727,46 @@
           <select class="field-input"><option selected>Commercial</option><option>Residential</option></select>
         </div>
         <div class="field-group">
+          <label class="field-label">Construction Type</label>
+          <select class="field-input"><option selected>New Construction</option><option>Renovation</option></select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">House Type</label>
+          <select class="field-input"><option>Simplex</option><option selected>Duplex</option><option>Triplex</option><option>Villa</option></select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Total Area (sq.ft)</label>
+          <input class="field-input" type="number" value="25000">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">No. of Floors</label>
+          <input class="field-input" type="number" value="12">
+        </div>
+        <div class="field-group">
+          <label class="field-label">No. of Halls</label>
+          <input class="field-input" type="number" value="24">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">No. of Rooms</label>
+          <input class="field-input" type="number" value="48">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Bedrooms</label>
+          <input class="field-input" type="number" value="36">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">Bathrooms</label>
+          <input class="field-input" type="number" value="48">
+        </div>
+        <div class="field-group">
           <label class="field-label">Location</label>
           <input class="field-input" type="text" value="Chennai">
         </div>
@@ -1802,6 +1806,116 @@
       <div class="field-group">
         <label class="field-label">Additional Details</label>
         <textarea class="field-input field-textarea" rows="3">Preferred communication via WhatsApp. Payments milestone based.</textarea>
+      </div>
+    </div>
+
+    <div class="att-form-card">
+      <h4 class="att-form-title">💰 Payment Details</h4>
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">Total Project Amount</label>
+          <input class="field-input" type="text" value="₹ 5,00,00,000">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Advance Amount</label>
+          <input class="field-input" type="text" value="₹ 1,00,00,000">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">Installment Details</label>
+          <input class="field-input" type="text" value="5 Installments of ₹ 80L">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Remaining Balance</label>
+          <input class="field-input" type="text" value="₹ 2,40,00,000">
+        </div>
+      </div>
+    </div>
+
+    <div class="att-form-card">
+      <div class="section-header">
+        <h4 class="att-form-title" style="margin:0;">👷 Team Management</h4>
+        <button class="btn-text" onclick="openSheet('workerSelectionSheet')">+ Add Worker</button>
+      </div>
+      <div class="team-card" style="margin-bottom:8px;box-shadow:none;border:1px solid var(--border-light)">
+        <div class="avatar-md" style="background:#2563EB;">RK</div>
+        <div class="tm-info"><p class="tm-name">Raj Kumar</p><p class="tm-role">Site Engineer</p></div>
+        <button class="action-btn-sm delete" onclick="showToast('Removed Raj Kumar')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+      </div>
+      <div class="team-card" style="box-shadow:none;border:1px solid var(--border-light)">
+        <div class="avatar-md" style="background:#F57C00;">SK</div>
+        <div class="tm-info"><p class="tm-name">Suresh K.</p><p class="tm-role">Supervisor</p></div>
+        <button class="action-btn-sm delete" onclick="showToast('Removed Suresh K.')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+      </div>
+    </div>
+
+    <div class="att-form-card">
+      <div class="section-header">
+        <h4 class="att-form-title" style="margin:0;">📸 Site Photos</h4>
+        <button class="btn-text" onclick="openSheet('uploadFileSheet')">+ Add Photo</button>
+      </div>
+      <div style="display:flex; gap:8px; overflow-x:auto;">
+        <div style="width:100px; height:80px; position:relative; background:var(--bg-input); border-radius:8px; flex-shrink:0;">
+          <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:var(--text-tertiary)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div style="position:absolute; top:4px; right:4px; display:flex; gap:4px; background:rgba(255,255,255,0.9); padding:2px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+            <button class="action-btn-sm" style="width:20px; height:20px; min-width:20px; padding:0; background:transparent; border:none;" onclick="openSheet('uploadFileSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+            <button class="action-btn-sm delete" style="width:20px; height:20px; min-width:20px; padding:0; background:transparent; border:none; color:var(--error);" onclick="showToast('Photo Removed')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          </div>
+        </div>
+        <div style="width:100px; height:80px; position:relative; background:var(--bg-input); border-radius:8px; flex-shrink:0;">
+          <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:var(--text-tertiary)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div style="position:absolute; top:4px; right:4px; display:flex; gap:4px; background:rgba(255,255,255,0.9); padding:2px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+            <button class="action-btn-sm" style="width:20px; height:20px; min-width:20px; padding:0; background:transparent; border:none;" onclick="openSheet('uploadFileSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+            <button class="action-btn-sm delete" style="width:20px; height:20px; min-width:20px; padding:0; background:transparent; border:none; color:var(--error);" onclick="showToast('Photo Removed')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="att-form-card">
+      <div class="section-header">
+        <h4 class="att-form-title" style="margin:0;">📁 File Management</h4>
+        <button class="btn-text" onclick="openSheet('uploadFileSheet')">+ Upload</button>
+      </div>
+      <div class="file-item" style="position:relative; padding-right:60px;">
+        <div class="file-icon pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="file-info"><p class="file-name">Floor_Plan_B2.pdf</p><p class="file-meta">2.4 MB · Jun 1, 2025</p></div>
+        <div style="position:absolute; right:12px; top:12px; display:flex; gap:4px;">
+          <button class="action-btn-sm" style="width:24px; height:24px;" onclick="openSheet('uploadFileSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+          <button class="action-btn-sm delete" style="width:24px; height:24px;" onclick="showToast('File Removed')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        </div>
+      </div>
+      <div class="file-item" style="position:relative; padding-right:60px;">
+        <div class="file-icon img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        <div class="file-info"><p class="file-name">Site_Photo_May30.jpg</p><p class="file-meta">1.8 MB · May 30, 2025</p></div>
+        <div style="position:absolute; right:12px; top:12px; display:flex; gap:4px;">
+          <button class="action-btn-sm" style="width:24px; height:24px;" onclick="openSheet('uploadFileSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+          <button class="action-btn-sm delete" style="width:24px; height:24px;" onclick="showToast('File Removed')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="att-form-card">
+      <div class="section-header">
+        <h4 class="att-form-title" style="margin:0;">💸 Expense Management</h4>
+        <button class="btn-text" onclick="openSheet('addExpenseSheet')">+ Add Expense</button>
+      </div>
+      <div class="expense-item" style="position:relative; padding-right:60px; margin-bottom:8px; box-shadow:none; border:1px solid var(--border-light)">
+        <div class="exp-icon" style="background:var(--info-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" width="18" height="18"><path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/></svg></div>
+        <div class="exp-info"><p class="exp-title">Labour Wages</p><p class="exp-meta">₹10,800</p></div>
+        <div style="position:absolute; right:12px; top:12px; display:flex; gap:4px;">
+          <button class="action-btn-sm" style="width:24px; height:24px;" onclick="openSheet('addExpenseSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          <button class="action-btn-sm delete" style="width:24px; height:24px;" onclick="showToast('Expense Removed')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        </div>
+      </div>
+      <div class="expense-item" style="position:relative; padding-right:60px; margin-bottom:8px; box-shadow:none; border:1px solid var(--border-light)">
+        <div class="exp-icon" style="background:var(--accent-surface)"><svg viewBox="0 0 24 24" fill="none" stroke="#F57C00" stroke-width="2" width="18" height="18"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+        <div class="exp-info"><p class="exp-title">Tea & Snacks</p><p class="exp-meta">₹450</p></div>
+        <div style="position:absolute; right:12px; top:12px; display:flex; gap:4px;">
+          <button class="action-btn-sm" style="width:24px; height:24px;" onclick="openSheet('addExpenseSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          <button class="action-btn-sm delete" style="width:24px; height:24px;" onclick="showToast('Expense Removed')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        </div>
       </div>
     </div>
 
@@ -1907,6 +2021,38 @@
     <button class="action-btn-sm" style="border:none; width:36px; height:36px; background:var(--bg-input);" onclick="showToast('Attachment menu opened')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></button>
     <input type="text" class="field-input" placeholder="Type a message..." style="flex:1; border-radius:20px; padding:10px 16px;">
     <button class="action-btn-sm" style="border:none; width:36px; height:36px; background:var(--primary); color:white;" onclick="showToast('Message sent')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+
+<!-- Worker Selection Sheet -->
+<div class="sheet-overlay" id="workerSelectionSheetOverlay" onclick="closeSheet('workerSelectionSheet')"></div>
+<div class="bottom-sheet" id="workerSelectionSheet">
+  <div class="sheet-drag"></div>
+  <div class="sheet-head">
+    <h3>Assign Worker</h3>
+    <button class="sheet-close" onclick="closeSheet('workerSelectionSheet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="sheet-body" style="padding-bottom:16px;">
+    <div style="margin-bottom:16px;">
+      <input type="text" class="field-input" placeholder="Search workers by name or role..." style="padding-left:12px;">
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div class="team-card" style="box-shadow:none;border:1px solid var(--border-light); margin-bottom:0;">
+        <div class="avatar-md" style="background:#2563EB;">RM</div>
+        <div class="tm-info"><p class="tm-name">Ramesh M.</p><p class="tm-role">Electrician</p></div>
+        <button class="btn-text" style="font-size:12px;" onclick="closeSheet('workerSelectionSheet'); showToast('Ramesh M. assigned!')">Select</button>
+      </div>
+      <div class="team-card" style="box-shadow:none;border:1px solid var(--border-light); margin-bottom:0;">
+        <div class="avatar-md" style="background:#F57C00;">VN</div>
+        <div class="tm-info"><p class="tm-name">Vijay N.</p><p class="tm-role">Plumber</p></div>
+        <button class="btn-text" style="font-size:12px;" onclick="closeSheet('workerSelectionSheet'); showToast('Vijay N. assigned!')">Select</button>
+      </div>
+      <div class="team-card" style="box-shadow:none;border:1px solid var(--border-light); margin-bottom:0;">
+        <div class="avatar-md" style="background:#16A34A;">AK</div>
+        <div class="tm-info"><p class="tm-name">Arun Kumar</p><p class="tm-role">Site Engineer</p></div>
+        <button class="btn-text" style="font-size:12px;" onclick="closeSheet('workerSelectionSheet'); showToast('Arun Kumar assigned!')">Select</button>
+      </div>
+    </div>
   </div>
 </div>
 
