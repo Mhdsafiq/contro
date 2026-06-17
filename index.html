@@ -457,7 +457,7 @@
         </div>
         <div style="position:relative; width:40px; height:40px; background:white; border-radius:50%; display:flex; justify-content:center; align-items:center; box-shadow:0 2px 8px rgba(37, 99, 235, 0.15); cursor:pointer;">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" width="20" height="20"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <input type="date" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="showScreen('dailyReportScreen')">
+          <input type="date" min="2025-01-01" max="2025-12-31" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="showScreen('dailyReportScreen')">
         </div>
       </div>
 
@@ -2165,23 +2165,43 @@
   
   <div class="screen-body pad" style="padding-bottom:80px;">
     
-    <!-- Overall Expense -->
-    <div class="summary-card" style="background:linear-gradient(135deg, #0D47A1, #1565C0); color:white; border:none; margin-bottom:16px;">
-      <p style="font-size:11px; text-transform:uppercase; opacity:0.7; margin-bottom:4px;">Total Expenses</p>
-      <p style="font-size:28px; font-weight:800;">₹11,450</p>
-      <div style="display:flex; justify-content:space-between; margin-top:12px; font-size:12px; font-weight:600;">
-        <span style="opacity:0.9;">Labour: ₹10,800</span>
-        <span style="opacity:0.9;">Tea: ₹450</span>
-        <span style="opacity:0.9;">Other: ₹200</span>
+    <!-- 1. Progress Details Card -->
+    <div class="summary-card" style="margin-bottom:16px;">
+      <div class="summary-header"><h4 style="font-size:14px; font-weight:700;">📈 Progress Details</h4></div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <p style="font-size:12px; color:var(--text-tertiary); font-weight:600;">Today's Progress</p>
+          <p style="font-size:24px; font-weight:800; color:var(--success);">+2%</p>
+        </div>
+        <div style="text-align:right;">
+          <p style="font-size:12px; color:var(--text-tertiary); font-weight:600;">Current</p>
+          <p style="font-size:18px; font-weight:800; color:var(--primary);">72%</p>
+          <p style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Prev: 70%</p>
+        </div>
       </div>
     </div>
-    
-    <!-- Worker Attendance Summary -->
+
+    <!-- 2. Attendance & Workforce Details Card -->
     <div class="summary-card" style="margin-bottom:16px;">
-      <div class="summary-header"><h4 style="font-size:14px; font-weight:700;">👥 Worker Attendance</h4></div>
+      <div class="summary-header"><h4 style="font-size:14px; font-weight:700;">👥 Attendance & Workforce</h4></div>
+      
+      <!-- Personnel Status -->
+      <div style="display:flex; gap:12px; margin-bottom:16px;">
+        <div style="flex:1; background:var(--bg-input); padding:10px; border-radius:8px; border-left:3px solid var(--success);">
+          <p style="font-size:11px; color:var(--text-tertiary); font-weight:600;">Site Engineer</p>
+          <p style="font-size:13px; font-weight:700; color:var(--text-primary);">Raj Kumar</p>
+          <p style="font-size:11px; color:var(--success); font-weight:700; margin-top:4px;">Present</p>
+        </div>
+        <div style="flex:1; background:var(--bg-input); padding:10px; border-radius:8px; border-left:3px solid var(--error);">
+          <p style="font-size:11px; color:var(--text-tertiary); font-weight:600;">Supervisor</p>
+          <p style="font-size:13px; font-weight:700; color:var(--text-primary);">Suresh K.</p>
+          <p style="font-size:11px; color:var(--error); font-weight:700; margin-top:4px;">Absent</p>
+        </div>
+      </div>
+
       <div style="display:flex; justify-content:center; align-items:center; flex-direction:column; margin-bottom:16px;">
         <span style="font-size:32px; font-weight:900; color:var(--primary);">15</span>
-        <span style="font-size:12px; color:var(--text-secondary); font-weight:600; text-transform:uppercase;">Total Workers</span>
+        <span style="font-size:12px; color:var(--text-secondary); font-weight:600; text-transform:uppercase;">Total Workforce</span>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
         <div style="background:var(--primary-surface); padding:10px; border-radius:8px; text-align:center;">
@@ -2193,7 +2213,7 @@
           <p style="font-size:18px; font-weight:800; color:var(--text-primary);">5</p>
         </div>
       </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
         <div style="border:1px solid var(--border-light); padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
           <span style="font-size:12px; font-weight:600; color:var(--text-secondary);">Full Day</span>
           <span style="font-size:14px; font-weight:800; color:var(--success);">12</span>
@@ -2203,35 +2223,117 @@
           <span style="font-size:14px; font-weight:800; color:var(--error);">3</span>
         </div>
       </div>
+      
+      <!-- Worker List -->
+      <p style="font-size:12px; color:var(--text-tertiary); font-weight:600; margin-bottom:8px;">WORKERS PRESENT</p>
+      <div style="max-height:120px; overflow-y:auto; border:1px solid var(--border-light); border-radius:8px; padding:8px;">
+        <div style="display:flex; justify-content:space-between; padding:6px; border-bottom:1px solid var(--bg-input);">
+          <span style="font-size:13px; font-weight:600;">Prakash M.</span><span style="font-size:12px; color:var(--success); font-weight:600;">Full Day</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:6px; border-bottom:1px solid var(--bg-input);">
+          <span style="font-size:13px; font-weight:600;">Arjun T.</span><span style="font-size:12px; color:var(--success); font-weight:600;">Full Day</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:6px; border-bottom:1px solid var(--bg-input);">
+          <span style="font-size:13px; font-weight:600;">Lakshmi</span><span style="font-size:12px; color:var(--error); font-weight:600;">Half Day</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:6px;">
+          <span style="font-size:13px; font-weight:600;">Kannan</span><span style="font-size:12px; color:var(--success); font-weight:600;">Full Day</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Task Details Card -->
+    <div class="summary-card" style="margin-bottom:16px;">
+      <div class="summary-header"><h4 style="font-size:14px; font-weight:700;">📝 Task Details</h4></div>
+      
+      <div style="margin-bottom:12px;">
+        <p style="font-size:12px; color:var(--text-tertiary); font-weight:600; margin-bottom:6px;">COMPLETED TASKS</p>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+          <span style="font-size:13px; color:var(--text-primary); font-weight:500;">Foundation concrete poured in Block A.</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+          <span style="font-size:13px; color:var(--text-primary); font-weight:500;">Steel binding for pillars.</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom:12px;">
+        <p style="font-size:12px; color:var(--text-tertiary); font-weight:600; margin-bottom:6px;">PENDING TASKS</p>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span style="font-size:13px; color:var(--text-primary); font-weight:500;">Curing of Block B foundation.</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom:12px;">
+        <p style="font-size:12px; color:var(--text-tertiary); font-weight:600; margin-bottom:6px;">BLOCKED / CANCELLED</p>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--error)" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span style="font-size:13px; color:var(--text-primary); font-weight:500;">Material delivery delayed. (Blocked)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Expense & Wage Details Card -->
+    <div class="summary-card" style="margin-bottom:16px;">
+      <div class="summary-header"><h4 style="font-size:14px; font-weight:700;">💰 Expense & Wage Details</h4></div>
+      <div style="background:linear-gradient(135deg, #0D47A1, #1565C0); color:white; border-radius:8px; padding:16px; margin-bottom:16px;">
+        <p style="font-size:11px; text-transform:uppercase; opacity:0.7; margin-bottom:4px;">Total Daily Expense</p>
+        <p style="font-size:28px; font-weight:800;">₹11,450</p>
+      </div>
+      
+      <p style="font-size:12px; color:var(--text-tertiary); font-weight:600; margin-bottom:8px;">EXPENSE BREAKDOWN</p>
+      <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-light); padding-bottom:8px; margin-bottom:8px;">
+        <span style="font-size:13px; font-weight:600;">Labour Wages</span><span style="font-size:14px; font-weight:800; color:var(--text-main);">₹10,800</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-light); padding-bottom:8px; margin-bottom:8px;">
+        <span style="font-size:13px; font-weight:600;">Tea & Snacks</span><span style="font-size:14px; font-weight:800; color:var(--text-main);">₹450</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:16px;">
+        <span style="font-size:13px; font-weight:600;">Other Expenses</span><span style="font-size:14px; font-weight:800; color:var(--text-main);">₹200</span>
+      </div>
+      
+      <p style="font-size:12px; color:var(--text-tertiary); font-weight:600; margin-bottom:8px;">WAGE BREAKDOWN</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+        <div style="border:1px solid var(--border-light); padding:10px; border-radius:8px;">
+          <p style="font-size:11px; color:var(--text-secondary); font-weight:600;">Male Wages</p>
+          <p style="font-size:14px; font-weight:800; color:var(--primary);">₹8,000</p>
+        </div>
+        <div style="border:1px solid var(--border-light); padding:10px; border-radius:8px;">
+          <p style="font-size:11px; color:var(--text-secondary); font-weight:600;">Female Wages</p>
+          <p style="font-size:14px; font-weight:800; color:var(--accent);">₹2,800</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="background:var(--success-surface); padding:10px; border-radius:8px;">
+          <p style="font-size:11px; color:var(--success); font-weight:700;">Full Day Wages</p>
+          <p style="font-size:14px; font-weight:800; color:var(--text-main);">₹9,600</p>
+        </div>
+        <div style="background:var(--error-surface); padding:10px; border-radius:8px;">
+          <p style="font-size:11px; color:var(--error); font-weight:700;">Half Day Wages</p>
+          <p style="font-size:14px; font-weight:800; color:var(--text-main);">₹1,200</p>
+        </div>
+      </div>
     </div>
     
-    <!-- Site Activity Summary -->
+    <!-- 5. Site Activity Photos -->
     <div class="summary-card">
-      <div class="summary-header"><h4 style="font-size:14px; font-weight:700;">🏗️ Site Activity Summary</h4></div>
-      
-      <div style="margin-bottom:16px;">
-        <p style="font-size:12px; color:var(--text-tertiary); font-weight:600; margin-bottom:8px;">WORK COMPLETED</p>
-        <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" width="16" height="16" style="margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
-          <p style="font-size:13px; color:var(--text-primary); font-weight:500;">Foundation concrete poured in Block A.</p>
+      <div class="summary-header"><h4 style="font-size:14px; font-weight:700;">📸 Site Activity Photos</h4></div>
+      <p style="font-size:12px; color:var(--text-tertiary); margin-bottom:12px;">Photos uploaded on this date</p>
+      <div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:8px;">
+        <div style="width:100px; height:80px; background:var(--bg-input); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid var(--border-light);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         </div>
-        <div style="display:flex; align-items:flex-start; gap:8px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" width="16" height="16" style="margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
-          <p style="font-size:13px; color:var(--text-primary); font-weight:500;">Steel binding for pillars completed.</p>
+        <div style="width:100px; height:80px; background:var(--bg-input); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid var(--border-light);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         </div>
-      </div>
-      
-      <div style="height:1px; background:var(--border-light); margin:12px 0;"></div>
-      
-      <div>
-        <p style="font-size:12px; color:var(--text-tertiary); font-weight:600; margin-bottom:8px;">PENDING TASKS</p>
-        <div style="display:flex; align-items:flex-start; gap:8px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--error)" stroke-width="2" width="16" height="16" style="margin-top:2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <p style="font-size:13px; color:var(--text-primary); font-weight:500;">Curing of Block B foundation.</p>
+        <div style="width:100px; height:80px; background:var(--bg-input); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid var(--border-light);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         </div>
       </div>
-      
     </div>
+    
   </div>
 </div>
 
