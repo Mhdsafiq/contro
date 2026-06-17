@@ -1351,3 +1351,23 @@ html, body {
 }
 .att-sub-row:last-child { border-bottom: none; }
 .att-sub-row strong { color: var(--text-primary); }
+
+/* Enhanced Chat Button */
+.action-btn-sm.chat {
+  background: var(--primary-surface);
+  color: var(--primary);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+  cursor: pointer;
+}
+.action-btn-sm.chat:hover {
+  background: var(--primary);
+  color: white;
+}

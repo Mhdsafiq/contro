@@ -52,34 +52,34 @@ function goBack() {
 // ─── BOTTOM NAV ─── //
 const companyMainScreens  = ['projectsScreen', 'dashboardScreen', 'stockHubScreen', 'workersScreen', 'profileScreen'];
 const workerMainScreens   = ['workerAttendanceScreen', 'workerTasksScreen', 'workerDashScreen', 'workerProfileScreen', 'workerReportHubScreen', 'workerProjDashScreen', 'workerMarkAttScreen', 'workerDailyReportScreen', 'workerReportFormScreen', 'workerProjectTasksListScreen'];
-const clientMainScreens   = ['clientOverviewScreen', 'clientProfileScreen'];
+const clientMainScreens   = ['clientOverviewScreen', 'clientProfileScreen', 'clientDateReportScreen', 'clientChatScreen'];
 
 function updateBottomNav(screenId) {
   const companyNav = document.getElementById('companyNav');
   const workerNav  = document.getElementById('workerNav');
   const clientNav  = document.getElementById('clientNav');
 
-  companyNav.classList.add('hidden');
-  workerNav.classList.add('hidden');
-  clientNav.classList.add('hidden');
+  if (companyNav) companyNav.classList.add('hidden');
+  if (workerNav) workerNav.classList.add('hidden');
+  if (clientNav) clientNav.classList.add('hidden');
 
   if (!currentRole) return;
 
   if (currentRole === 'company') {
     const showOn = [...companyMainScreens, 'projectOverviewScreen', 'notificationsScreen'];
-    if (showOn.includes(screenId)) companyNav.classList.remove('hidden');
+    if (showOn.includes(screenId) && companyNav) companyNav.classList.remove('hidden');
   } else if (currentRole === 'worker') {
     const showOn = [...workerMainScreens, 'workerLeaveHubScreen', 'workerLeaveFormScreen', 'notificationsScreen', 'stockHubScreen'];
-    if (showOn.includes(screenId)) workerNav.classList.remove('hidden');
+    if (showOn.includes(screenId) && workerNav) workerNav.classList.remove('hidden');
   } else if (currentRole === 'client') {
-    if (clientMainScreens.includes(screenId)) clientNav.classList.remove('hidden');
+    if (clientMainScreens.includes(screenId) && clientNav) clientNav.classList.remove('hidden');
   }
 }
 
 function switchBottomNav(btn, screenId, navId) {
   const nav = document.getElementById(navId);
-  nav.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  btn.classList.add('active');
+  if (nav) nav.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (btn) btn.classList.add('active');
   screenHistory = [screenId];
   showScreen(screenId);
 }
@@ -90,19 +90,19 @@ function loginAs(role) {
   if (role === 'company') {
     screenHistory = ['projectsScreen'];
     showScreen('projectsScreen');
-    // Activate first nav item
     const nav = document.getElementById('companyNav');
-    nav.querySelectorAll('.nav-item').forEach((n, i) => n.classList.toggle('active', i === 0));
+    if (nav) nav.querySelectorAll('.nav-item').forEach((n, i) => n.classList.toggle('active', i === 0));
   } else if (role === 'worker') {
     screenHistory = ['workerDashScreen'];
     showScreen('workerDashScreen');
     const nav = document.getElementById('workerNav');
-    nav.querySelectorAll('.nav-item').forEach((n, i) => n.classList.toggle('active', i === 0));
+    if (nav) nav.querySelectorAll('.nav-item').forEach((n, i) => n.classList.toggle('active', i === 0));
   } else if (role === 'client') {
     screenHistory = ['clientOverviewScreen'];
     showScreen('clientOverviewScreen');
     const nav = document.getElementById('clientNav');
-    nav.querySelectorAll('.nav-item').forEach((n, i) => n.classList.toggle('active', i === 0));
+    if (nav) nav.querySelectorAll('.nav-item').forEach((n, i) => n.classList.toggle('active', i === 0));
+    initClientDate();
   }
 }
 
@@ -607,4 +607,30 @@ function submitDailyReport() {
   setTimeout(() => {
     logout();
   }, 1500);
+}
+
+// ─── CLIENT PORTAL HELPERS ─── //
+
+function initClientDate() {
+  const dateEl = document.getElementById('clientDateText');
+  if (dateEl) {
+    const now = new Date();
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    const formatted = now.toLocaleDateString('en-IN', options);
+    dateEl.textContent = `Today, ${formatted}`;
+  }
+}
+
+function openClientDateReport(dateValue) {
+  if (!dateValue) return;
+  const d = new Date(dateValue);
+  const titleEl = document.getElementById('clientReportDateTitle');
+  const dayEl = document.getElementById('clientReportDayName');
+  if (titleEl) {
+    titleEl.textContent = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+  if (dayEl) {
+    dayEl.textContent = d.toLocaleDateString('en-IN', { weekday: 'long' });
+  }
+  showScreen('clientDateReportScreen');
 }
