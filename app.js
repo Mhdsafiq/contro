@@ -634,3 +634,61 @@ function openClientDateReport(dateValue) {
   }
   showScreen('clientDateReportScreen');
 }
+
+// ─── DAILY REPORT ─── //
+function updateReportDate(dateString) {
+  if (!dateString) return;
+  const d = new Date(dateString);
+  const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+  const formattedDate = d.toLocaleDateString('en-IN', options);
+  
+  // Keep the time static or current time for simplicity
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true }).toUpperCase();
+  
+  const displayString = `${formattedDate} · ${timeStr}`;
+  
+  const dateText = document.getElementById('drDateText');
+  if (dateText) {
+    dateText.textContent = displayString;
+  }
+  
+  showScreen('workerDailyReportScreen');
+}
+
+// ─── DAILY CLOSURE REPORT ─── //
+function handleClosureDate(dateString) {
+  if (!dateString) return;
+  const selectedDate = new Date(dateString);
+  const today = new Date();
+  
+  // Format the selected date for display
+  const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+  const formattedDate = selectedDate.toLocaleDateString('en-IN', options);
+  
+  const reportDateEl = document.getElementById('reportDateTime');
+  if (reportDateEl) {
+    reportDateEl.textContent = formattedDate;
+  }
+  
+  // Check if selected date is today
+  const isToday = selectedDate.getDate() === today.getDate() && 
+                  selectedDate.getMonth() === today.getMonth() && 
+                  selectedDate.getFullYear() === today.getFullYear();
+                  
+  const submitBtn = document.getElementById('closureSubmitBtn');
+  const submitText = document.getElementById('closureSubmitText');
+  
+  if (submitBtn && submitText) {
+    if (isToday) {
+      // Allow submitting today's report
+      submitBtn.style.display = 'block';
+      submitText.style.display = 'block';
+    } else {
+      // Past reports are view-only
+      submitBtn.style.display = 'none';
+      submitText.style.display = 'none';
+    }
+  }
+}
+

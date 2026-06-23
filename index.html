@@ -457,7 +457,7 @@
         </div>
         <div style="position:relative; width:40px; height:40px; background:white; border-radius:50%; display:flex; justify-content:center; align-items:center; box-shadow:0 2px 8px rgba(37, 99, 235, 0.15); cursor:pointer;">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" width="20" height="20"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <input type="date" min="2025-01-01" max="2025-12-31" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="showScreen('workerDailyReportScreen')">
+          <input type="date" min="2025-01-01" max="2025-12-31" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="updateReportDate(this.value)">
         </div>
       </div>
 
@@ -1254,7 +1254,8 @@
     <div style="width:36px"></div>
   </div>
   <div class="screen-body pad">
-    <div class="att-status-banner" style="border-left-color:var(--primary)">
+    <div class="att-status-banner" style="border-left-color:var(--primary); position:relative; cursor:pointer;" onclick="document.getElementById('closureDatePicker').showPicker()">
+      <input type="date" id="closureDatePicker" style="position:absolute; top:0; left:0; width:0; height:0; opacity:0; border:none; z-index:-1;" onchange="handleClosureDate(this.value)">
       <div class="att-status-icon" style="background:var(--primary)"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="20" height="20"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
       <div class="att-status-text"><p class="att-status-label">Report Date</p><p class="att-status-value" id="reportDateTime">Mon, 16 Jun 2025</p></div>
     </div>
@@ -1267,66 +1268,58 @@
       <h4 class="att-form-title">👷 Workforce Summary</h4>
       <div class="field-group">
         <label class="field-label">Total Workers Today</label>
-        <input class="field-input" type="number" id="rptTotal" placeholder="Auto from attendance" value="15" readonly style="background:var(--bg-input)">
+        <input class="field-input" type="number" id="rptTotal" value="15" readonly style="background:var(--bg-input)">
       </div>
       <div class="field-row">
-        <div class="field-group"><label class="field-label">Male Workers</label><input class="field-input rpt-calc" type="number" id="rptMale" placeholder="e.g. 10" value="10"></div>
-        <div class="field-group"><label class="field-label">Female Workers</label><input class="field-input rpt-calc" type="number" id="rptFemale" placeholder="e.g. 5" value="5"></div>
+        <div class="field-group"><label class="field-label">Male Workers</label><input class="field-input rpt-calc" type="number" id="rptMale" value="10" readonly style="background:var(--bg-input)"></div>
+        <div class="field-group"><label class="field-label">Female Workers</label><input class="field-input rpt-calc" type="number" id="rptFemale" value="5" readonly style="background:var(--bg-input)"></div>
       </div>
       <div class="field-row">
-        <div class="field-group"><label class="field-label">Full Day</label><input class="field-input rpt-calc" type="number" id="rptFullDay" placeholder="e.g. 12" value="12"></div>
-        <div class="field-group"><label class="field-label">Half Day</label><input class="field-input rpt-calc" type="number" id="rptHalfDay" placeholder="e.g. 3" value="3"></div>
+        <div class="field-group"><label class="field-label">Full Day</label><input class="field-input rpt-calc" type="number" id="rptFullDay" value="12" readonly style="background:var(--bg-input)"></div>
+        <div class="field-group"><label class="field-label">Half Day</label><input class="field-input rpt-calc" type="number" id="rptHalfDay" value="3" readonly style="background:var(--bg-input)"></div>
       </div>
     </div>
     
     <div class="att-form-card">
       <h4 class="att-form-title">💰 Wage Details</h4>
       <div class="field-row">
-        <div class="field-group"><label class="field-label">Male Full Day ₹</label><input class="field-input rpt-calc" type="number" id="rptMaleFullWage" value="800"></div>
-        <div class="field-group"><label class="field-label">Male Half Day ₹</label><input class="field-input rpt-calc" type="number" id="rptMaleHalfWage" value="400"></div>
+        <div class="field-group"><label class="field-label">Male Full Day ₹</label><input class="field-input rpt-calc" type="number" id="rptMaleFullWage" value="800" readonly style="background:var(--bg-input)"></div>
+        <div class="field-group"><label class="field-label">Male Half Day ₹</label><input class="field-input rpt-calc" type="number" id="rptMaleHalfWage" value="400" readonly style="background:var(--bg-input)"></div>
       </div>
       <div class="field-row">
-        <div class="field-group"><label class="field-label">Female Full Day ₹</label><input class="field-input rpt-calc" type="number" id="rptFemaleFullWage" value="600"></div>
-        <div class="field-group"><label class="field-label">Female Half Day ₹</label><input class="field-input rpt-calc" type="number" id="rptFemaleHalfWage" value="300"></div>
+        <div class="field-group"><label class="field-label">Female Full Day ₹</label><input class="field-input rpt-calc" type="number" id="rptFemaleFullWage" value="600" readonly style="background:var(--bg-input)"></div>
+        <div class="field-group"><label class="field-label">Female Half Day ₹</label><input class="field-input rpt-calc" type="number" id="rptFemaleHalfWage" value="300" readonly style="background:var(--bg-input)"></div>
       </div>
     </div>
     <div class="att-form-card">
       <h4 class="att-form-title">🧱 Material Usage</h4>
-      <div style="margin-bottom:12px;">
-        <p style="font-size:12px; color:var(--text-tertiary);">Select materials used from the project stock and enter the quantity.</p>
-      </div>
-      
       <div class="field-row" style="margin-bottom:8px">
         <div class="field-group" style="flex:2">
           <label class="field-label">Material</label>
-          <select class="field-input">
-            <option value="" disabled selected>Select Material...</option>
-            <option>Cement (Bags)</option>
-            <option>River Sand (Units)</option>
-            <option>M-Sand (Units)</option>
-            <option>Bricks (Nos)</option>
-            <option>Steel 8mm (Kgs)</option>
-            <option>Steel 12mm (Kgs)</option>
-            <option>Paint (Liters)</option>
-          </select>
+          <input class="field-input" type="text" value="Cement (Bags)" readonly style="background:var(--bg-input)">
         </div>
         <div class="field-group" style="flex:1">
           <label class="field-label">Quantity</label>
-          <input class="field-input" type="number" placeholder="e.g. 50">
+          <input class="field-input" type="number" value="50" readonly style="background:var(--bg-input)">
         </div>
       </div>
-
-      <button style="background:none; border:1px dashed var(--border); border-radius:var(--radius-sm); padding:10px; width:100%; color:var(--primary); font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; margin-top:4px;" onclick="showToast('Add material row')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Add Another Material
-      </button>
+      <div class="field-row" style="margin-bottom:8px">
+        <div class="field-group" style="flex:2">
+          <label class="field-label">Material</label>
+          <input class="field-input" type="text" value="Steel 12mm (Kgs)" readonly style="background:var(--bg-input)">
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Quantity</label>
+          <input class="field-input" type="number" value="1000" readonly style="background:var(--bg-input)">
+        </div>
+      </div>
     </div>
     
     <div class="att-form-card">
       <h4 class="att-form-title">🧾 Expense Details</h4>
       <div class="field-row">
-        <div class="field-group"><label class="field-label">Tea &amp; Snacks ₹</label><input class="field-input rpt-calc" type="number" id="rptTea" value="450"></div>
-        <div class="field-group"><label class="field-label">Other Expenses ₹</label><input class="field-input rpt-calc" type="number" id="rptOther" value="200"></div>
+        <div class="field-group"><label class="field-label">Tea &amp; Snacks ₹</label><input class="field-input rpt-calc" type="number" id="rptTea" value="450" readonly style="background:var(--bg-input)"></div>
+        <div class="field-group"><label class="field-label">Other Expenses ₹</label><input class="field-input rpt-calc" type="number" id="rptOther" value="200" readonly style="background:var(--bg-input)"></div>
       </div>
     </div>
     
@@ -1356,10 +1349,10 @@
       </div>
     </div>
     
-    <button class="btn-primary" style="width:100%;margin-top:8px;padding:14px;font-size:15px" onclick="submitDailyReport()">
+    <button id="closureSubmitBtn" class="btn-primary" style="width:100%;margin-top:8px;padding:14px;font-size:15px" onclick="submitDailyReport()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Submit Report &amp; Sign Out
     </button>
-    <p style="text-align:center;font-size:11px;color:var(--text-tertiary);margin-top:8px">Report will be sent to Admin for verification. You will be signed out after submission.</p>
+    <p id="closureSubmitText" style="text-align:center;font-size:11px;color:var(--text-tertiary);margin-top:8px">Report will be sent to Admin for verification. You will be signed out after submission.</p>
     
     <div style="height:24px"></div>
   </div>
@@ -2588,19 +2581,19 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
     <span>Dashboard</span>
   </div>
-  <div class="nav-item" onclick="showToast('Navigate to Attendance')">
+  <div class="nav-item" onclick="switchBottomNav(this, 'workerAttendanceScreen', 'workerNav')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     <span>Attendance</span>
   </div>
-  <div class="nav-item" onclick="showToast('Navigate to Tasks')">
+  <div class="nav-item" onclick="switchBottomNav(this, 'workerTasksScreen', 'workerNav')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
     <span>Tasks</span>
   </div>
-  <div class="nav-item" onclick="showToast('Navigate to Report')">
+  <div class="nav-item" onclick="switchBottomNav(this, 'workerReportHubScreen', 'workerNav')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
     <span>Report</span>
   </div>
-  <div class="nav-item" onclick="showToast('Navigate to Settings')">
+  <div class="nav-item" onclick="switchBottomNav(this, 'workerProfileScreen', 'workerNav')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
     <span>Settings</span>
   </div>
@@ -3161,6 +3154,233 @@
     <span>Settings</span>
   </div>
 </nav>
+
+<!-- ═══════════════════════════════════════
+     DAILY REPORT PAGE
+═══════════════════════════════════════ -->
+<div class="screen" id="workerDailyReportScreen" style="background:#F8FAFC;">
+  <div class="inner-topbar" style="background:white; border-bottom:1px solid var(--border-light); z-index:10; position:sticky; top:0;">
+    <button class="btn-back" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+    <div style="text-align:center;">
+      <h2 class="inner-title" style="margin:0; font-size:16px;">Daily Report</h2>
+      <p style="font-size:11px; color:var(--text-secondary); font-weight:600;">villa</p>
+    </div>
+    <div style="position:relative; width:36px; height:36px; display:flex; justify-content:center; align-items:center; cursor:pointer;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" width="20" height="20"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <input type="date" id="reportDatePicker" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="updateReportDate(this.value)">
+    </div>
+  </div>
+
+  <div class="screen-body pad" style="padding-bottom:100px;">
+    
+    <!-- HEADER CARDS -->
+    <div style="background:white; border-radius:12px; padding:16px; display:flex; align-items:center; gap:16px; margin-bottom:12px; border:1px solid var(--border-light); border-left:4px solid var(--primary); box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+      <div style="width:40px; height:40px; background:var(--primary); border-radius:8px; display:flex; align-items:center; justify-content:center; color:white;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div>
+        <p style="font-size:10px; font-weight:700; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px;">Date & Time</p>
+        <p style="font-size:14px; font-weight:800;" id="drDateText">Tue, 23 Jun 2026 · 10:43 AM</p>
+      </div>
+    </div>
+
+    <div style="background:white; border-radius:12px; padding:16px; display:flex; align-items:center; gap:16px; margin-bottom:24px; border:1px solid var(--border-light); border-left:4px solid var(--success); box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+      <div style="width:40px; height:40px; background:var(--success); border-radius:8px; display:flex; align-items:center; justify-content:center; color:white;">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 3L2 12h3v8h14v-8h3L12 3zm-2 17v-6h4v6h-4z"/></svg>
+      </div>
+      <div>
+        <p style="font-size:10px; font-weight:700; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px;">Project</p>
+        <p style="font-size:14px; font-weight:800; text-transform:capitalize;">villa</p>
+      </div>
+    </div>
+
+    <!-- 1. ATTENDANCE -->
+    <h3 style="font-size:14px; font-weight:800; color:var(--text-primary); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px;">👷 Worker Attendance</h3>
+    
+    <div class="summary-card" style="margin-bottom:12px;">
+      <h4 style="font-size:13px; font-weight:800; margin-bottom:16px; color:var(--text-primary);">👨 MALE WORKERS</h4>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+        <div>
+          <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; text-transform:uppercase; margin-bottom:4px;">Total Count</p>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary); background:var(--bg-input); padding:8px 12px; border-radius:8px;">10</p>
+        </div>
+        <div>
+          <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; text-transform:uppercase; margin-bottom:4px;">Wage/Day</p>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary); background:var(--bg-input); padding:8px 12px; border-radius:8px;">₹500</p>
+        </div>
+        <div>
+          <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; text-transform:uppercase; margin-bottom:4px;">Full Day</p>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary); background:var(--bg-input); padding:8px 12px; border-radius:8px;">8</p>
+        </div>
+        <div>
+          <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; text-transform:uppercase; margin-bottom:4px;">Half Day</p>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary); background:var(--bg-input); padding:8px 12px; border-radius:8px;">2</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-card" style="margin-bottom:12px;">
+      <h4 style="font-size:13px; font-weight:800; margin-bottom:16px; color:var(--text-primary);">👩 FEMALE WORKERS</h4>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+        <div>
+          <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; text-transform:uppercase; margin-bottom:4px;">Total Count</p>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary); background:var(--bg-input); padding:8px 12px; border-radius:8px;">10</p>
+        </div>
+        <div>
+          <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; text-transform:uppercase; margin-bottom:4px;">Wage/Day</p>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary); background:var(--bg-input); padding:8px 12px; border-radius:8px;">₹500</p>
+        </div>
+        <div>
+          <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; text-transform:uppercase; margin-bottom:4px;">Full Day</p>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary); background:var(--bg-input); padding:8px 12px; border-radius:8px;">8</p>
+        </div>
+        <div>
+          <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; text-transform:uppercase; margin-bottom:4px;">Half Day</p>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary); background:var(--bg-input); padding:8px 12px; border-radius:8px;">2</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-card" style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:16px;">💰</span>
+        <h4 style="font-size:12px; font-weight:800; color:var(--text-primary); text-transform:uppercase;">TOTAL WAGE COST</h4>
+      </div>
+      <p style="font-size:16px; font-weight:800; color:var(--success);">₹9,000.00</p>
+    </div>
+
+    <div class="summary-card" style="margin-bottom:12px;">
+      <h4 style="font-size:12px; font-weight:800; margin-bottom:12px; color:var(--text-primary); text-transform:uppercase;">GROUP PHOTO</h4>
+      <div style="width:100%; height:140px; background:var(--bg-input); border-radius:8px; border:2px dashed var(--border-light); display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--text-tertiary);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32" style="margin-bottom:8px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <p style="font-size:13px; font-weight:700; color:var(--primary);">Uploaded group photo</p>
+        <p style="font-size:11px;">Admin verified this photo</p>
+      </div>
+    </div>
+
+    <div class="summary-card" style="margin-bottom:32px;">
+      <h4 style="font-size:12px; font-weight:800; margin-bottom:12px; color:var(--text-tertiary); text-transform:uppercase;">NOTES (OPTIONAL)</h4>
+      <p style="font-size:13px; color:var(--text-secondary); background:var(--bg-input); padding:12px; border-radius:8px; min-height:60px;">Work started on time. Material arrived slightly late.</p>
+    </div>
+
+    <!-- 2. EXPENSES -->
+    <h3 style="font-size:14px; font-weight:800; color:var(--text-primary); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px;">💸 Daily Expenses</h3>
+    
+    <div class="summary-card" style="margin-bottom:12px;">
+      <h4 style="font-size:13px; font-weight:800; margin-bottom:16px; color:var(--text-primary);">FOOD & BEVERAGE</h4>
+      <div style="margin-bottom:12px;">
+        <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; margin-bottom:4px;">Tea & Coffee</p>
+        <div style="background:var(--bg-input); border-radius:8px; padding:10px 12px; display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--text-tertiary); font-weight:600;">₹</span>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary);">250.00</p>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; margin-bottom:4px;">Snacks</p>
+        <div style="background:var(--bg-input); border-radius:8px; padding:10px 12px; display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--text-tertiary); font-weight:600;">₹</span>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary);">200.00</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-card" style="margin-bottom:12px;">
+      <h4 style="font-size:13px; font-weight:800; margin-bottom:16px; color:var(--text-primary);">EXTRA PURCHASES</h4>
+      <div style="margin-bottom:12px;">
+        <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; margin-bottom:4px;">Price</p>
+        <div style="background:var(--bg-input); border-radius:8px; padding:10px 12px; display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--text-tertiary); font-weight:600;">₹</span>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary);">150.00</p>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; margin-bottom:4px;">Description</p>
+        <p style="font-size:13px; color:var(--text-secondary); background:var(--bg-input); padding:10px 12px; border-radius:8px;">Bought pens & stationery</p>
+      </div>
+    </div>
+
+    <div class="summary-card" style="margin-bottom:12px;">
+      <h4 style="font-size:13px; font-weight:800; margin-bottom:16px; color:var(--text-primary);">MATERIAL PURCHASES</h4>
+      <div style="margin-bottom:12px;">
+        <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; margin-bottom:4px;">Selected Material</p>
+        <p style="font-size:13px; color:var(--text-secondary); background:var(--bg-input); padding:10px 12px; border-radius:8px;">Sand (M-Sand)</p>
+      </div>
+      <div>
+        <p style="font-size:11px; color:var(--text-tertiary); font-weight:700; margin-bottom:4px;">Material Cost</p>
+        <div style="background:var(--bg-input); border-radius:8px; padding:10px 12px; display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--text-tertiary); font-weight:600;">₹</span>
+          <p style="font-size:14px; font-weight:700; color:var(--text-secondary);">5000.00</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:16px; margin-bottom:32px;">
+      <h4 style="font-size:14px; font-weight:700; color:var(--text-secondary);">Total Expenses</h4>
+      <p style="font-size:20px; font-weight:900; color:var(--text-primary);">₹5,600.00</p>
+    </div>
+
+    <!-- 3. STOCK -->
+    <h3 style="font-size:14px; font-weight:800; color:var(--text-primary); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px;">📦 Stock Details</h3>
+    <div class="summary-card" style="margin-bottom:32px;">
+      <p style="font-size:11px; font-weight:700; color:var(--text-tertiary); text-transform:uppercase; margin-bottom:12px;">New & Extra Stock Added</p>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding-left:12px; border-left:3px solid var(--success);">
+        <div>
+          <p style="font-size:14px; font-weight:700;">Cement Bags</p>
+          <p style="font-size:11px; color:var(--text-tertiary);">Added at 09:00 AM</p>
+        </div>
+        <div style="text-align:right;">
+          <p style="font-size:14px; font-weight:800; color:var(--success);">+50</p>
+          <p style="font-size:11px; color:var(--text-tertiary);">bags</p>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding-left:12px; border-left:3px solid var(--success);">
+        <div>
+          <p style="font-size:14px; font-weight:700;">Steel (TMT)</p>
+          <p style="font-size:11px; color:var(--text-tertiary);">Added at 10:15 AM</p>
+        </div>
+        <div style="text-align:right;">
+          <p style="font-size:14px; font-weight:800; color:var(--success);">+1000</p>
+          <p style="font-size:11px; color:var(--text-tertiary);">kg</p>
+        </div>
+      </div>
+      
+      <p style="font-size:11px; font-weight:700; color:var(--text-tertiary); text-transform:uppercase; margin-bottom:12px; border-top:1px solid var(--border-light); padding-top:16px;">Stock Reduced / Used</p>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-left:12px; border-left:3px solid var(--error);">
+        <div>
+          <p style="font-size:14px; font-weight:700;">Bricks</p>
+          <p style="font-size:11px; color:var(--text-tertiary);">Used at 02:30 PM</p>
+        </div>
+        <div style="text-align:right;">
+          <p style="font-size:14px; font-weight:800; color:var(--error);">-500</p>
+          <p style="font-size:11px; color:var(--text-tertiary);">pcs</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. TASKS -->
+    <h3 style="font-size:14px; font-weight:800; color:var(--text-primary); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px;">✅ Daily Tasks</h3>
+    <div class="summary-card" style="margin-bottom:16px;">
+      <div style="display:flex; gap:12px; align-items:flex-start; margin-bottom:16px;">
+        <div style="width:24px; height:24px; border-radius:50%; background:var(--success-surface); color:var(--success); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <p style="font-size:14px; font-weight:700; text-decoration:line-through; opacity:0.6; color:var(--text-primary);">Complete 1st floor roof concreting</p>
+          <p style="font-size:12px; color:var(--text-tertiary); margin-top:2px;">Completed</p>
+        </div>
+      </div>
+      <div style="display:flex; gap:12px; align-items:flex-start;">
+        <div style="width:24px; height:24px; border-radius:50%; background:var(--error-surface); color:var(--error); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <div>
+          <p style="font-size:14px; font-weight:700; color:var(--text-primary);">Plumbing initial setup</p>
+          <p style="font-size:12px; color:var(--error); font-weight:600; margin-top:2px;">Blocked - Material delayed</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div><!-- end app-shell -->
 <script src="app.js"></script>
