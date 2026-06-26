@@ -38,19 +38,22 @@ function showScreen(screenId) {
   updateBottomNav(screenId);
 }
 
+function openVendorList(category) {
+  const titleEl = document.getElementById('vlTitle');
+  if (titleEl) titleEl.innerText = category + ' Vendors';
+  showScreen('vendorListScreen');
+}
+
 function goBack() {
   if (screenHistory.length > 1) {
     screenHistory.pop();
     const prev = screenHistory[screenHistory.length - 1];
-    // avoid re-pushing by temporarily removing last item
-    const saved = screenHistory.pop();
     showScreen(prev);
-    screenHistory.push(saved);
   }
 }
 
 // ─── BOTTOM NAV ─── //
-const companyMainScreens  = ['projectsScreen', 'dashboardScreen', 'stockHubScreen', 'workersScreen', 'profileScreen'];
+const companyMainScreens  = ['projectsScreen', 'dashboardScreen', 'materialsLandingScreen', 'workersScreen', 'profileScreen'];
 const workerMainScreens   = ['workerAttendanceScreen', 'workerTasksScreen', 'workerDashScreen', 'workerProfileScreen', 'workerReportHubScreen', 'workerProjDashScreen', 'workerMarkAttScreen', 'workerDailyReportScreen', 'workerReportFormScreen', 'workerProjectTasksListScreen'];
 const clientMainScreens   = ['clientOverviewScreen', 'clientProfileScreen', 'clientDateReportScreen', 'clientChatScreen'];
 
